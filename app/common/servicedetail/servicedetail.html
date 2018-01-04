@@ -1,0 +1,87 @@
+<div class="detail">
+    <div class="container center-align" ng-if="$ctrl.item.is_active">
+        <div class="card white color-brown row title">
+            <h3>Detalle de producto o servicio</h3>
+        </div>
+        <div class="card white row logo">
+            <img src="assets/img/sell_gel.png" alt="stamp" height="130">
+        </div>
+        <div class="card row left-align">
+            <div class="col s12 m12 lightseagreen title">
+                <span class="color-yellow">Entidad:</span><span class="color-white"> {{$ctrl.item.institution.name}}</span>
+            </div>
+            <div class="col s12 m6">
+                <div class="row info gainsboro valign-wrapper center-align">
+                    <div class="left-align">
+                        <div class="color-brown">
+                            <span>Nombre del producto o servicio:</span>
+                        </div>
+                        <div>
+                            <span>{{$ctrl.item.id}} - {{$ctrl.item.name}}</span>
+                        </div>
+                        <div>
+                            <span class="color-brown">Nivel:</span><span>{{$ctrl.item.status.level}}</span>
+                        </div>
+                        <div>
+                            <span class="color-brown">Estado:</span><span>OTORGADO</span>
+                        </div>
+                        <div>
+                            <span class="color-brown">Fecha de certificación:</span><span>{{$ctrl.item.status.timestamp | date}}</span>
+                        </div>
+                        <div>
+                            <span class="color-brown">Fecha de vigencia:</span><span>{{$ctrl.item.status.valid_to | date}}</span>
+                        </div>
+                        <div>
+                            <span class="color-brown">Sitio Web del Producto o Servicio:</span><span><a target="_blank" href="{{$ctrl.item.url}}">{{$ctrl.item.name}}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="row border">
+                    <div class="col s4 m4 color-yellow center-align">
+                        <div class="fa fa-star star">
+                            <span class="color-white">{{$ctrl.item.rate |number : 2}}</span>
+                        </div>
+                        <br>
+                        <span>Calificación promedio</span>
+                    </div>
+                    <div class="col s7 m7 center-align">
+                        <span class="full-rate">
+                            <i class="fa fa-star" ng-class="{'color-yellow': i <= $ctrl.item.rate }" ng-repeat="i in [1,2,3,4,5]" ></i>
+                        </span>
+                        <br>
+                        <a class='btn' 
+                        ng-disabled="$ctrl.disabled"
+                        data-target='qualify' modal>Calificar</a>
+                        <p class="left-align">
+                            El producto que usted está viendo ha sido certificado con EL SELLO DE EXCELENCIA, 
+                            y queremos que usted sea parte de esta experiencia.<br>
+                            Lo invitamos a calificar y dejar sus comentarios y su opinión.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container center-align" ng-if="$ctrl.item && !$ctrl.item.is_active">
+        <h3>El Producto o Servicio no se encuentra activo.</h3>
+    </div>
+</div>
+
+<footer-app></footer-app>
+
+<!-- Modal Structure -->
+<div id="qualify" class="modal">
+    <div class="brown title">
+        <a class="pull-right modal-action modal-close" >
+            <i class="fa fa-times color-white"></i>
+        </a>
+        <div class="clearfix">
+        </div>
+    </div>
+    <div class="modal-content">
+        <evaluation service="$ctrl.item"></evaluation>
+    </div>
+</div>

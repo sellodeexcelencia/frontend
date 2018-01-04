@@ -1,0 +1,84 @@
+<section class="service-entity">
+    <div class="info card row white">
+        <div class="badge gainsboro center-align">
+            <img src="assets/img/sell_gel.png" alt="badge" class="fame-icon">
+            <div class="lightseagreen color-white">
+                <span>{{$ctrl.service.category.name}}</span>
+            </div>
+        </div>
+        <div class="service-item-content">
+            <div class="color-brown">{{$ctrl.service.entity.name}}</div>
+            <div>
+                <div>{{$ctrl.service.id}} - {{$ctrl.service.name}}</div>
+                <div class="color-lightseagreen">Nivel: {{$ctrl.service.status.level}}</div>
+                <div ng-if="$ctrl.service.certified">
+                    <span>Fecha de cerficación: </span>
+                    <span>{{$ctrl.service.status.timestamp | date}}</span>
+                    <br>
+                    <span>Fecha de vigencia: </span>
+                    <span>{{$ctrl.service.status.valid_to | date}}</span>
+                </div>
+                <div ng-if="($ctrl.service.status.id_status === $ctrl.STATES.SERVICE.INCOMPLETO || $ctrl.service.status.id_status== $ctrl.STATES.SERVICE.VERIFICACION) && !$ctrl.service.certified">
+                    <span>Fecha de postulación: </span><span>{{$ctrl.service.status.timestamp | date}}</span>
+                    <br>
+                    <span>Plazo de validación: </span><span>{{$ctrl.service.status.valid_to | date}}</span>
+                </div>
+                <div ng-if="($ctrl.service.status.id_status=== $ctrl.STATES.SERVICE.EVALUACION) && !$ctrl.service.certified">
+                    <span>Fecha de validación: </span><span>{{$ctrl.service.status.timestamp | date}}</span>
+                    <br>
+                    <span>Plazo de evaluación: </span><span>{{$ctrl.service.status.valid_to | date}}</span>
+                </div>
+                <div ng-if="($ctrl.service.current_status === $ctrl.STATES.SERVICE.NO_CUMPLE) && !$ctrl.service.certified">
+                    <span>Fecha de evaluación: </span><span>{{$ctrl.service.status.timestamp | date}}</span>
+                    <br>
+                </div>
+
+                <a ng-href="{{$ctrl.service.url}}" target="_blank" class="color-lightseagreen">{{$ctrl.service.url}}</a>
+            </div>
+        </div>
+        <div class="service-item-result gainsboro valign-wrapper" ng-if="$ctrl.service.current_status == $ctrl.STATES.SERVICE.CUMPLE || $ctrl.service.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE">
+            <div class="color-green" ng-if="$ctrl.service.status.id_status == $ctrl.STATES.SERVICE.CUMPLE">
+                <!--CUMPLE-->
+                <span>CUMPLE</span><i class="fa fa-check"></i>
+            </div>
+            <div class="color-red" ng-if="$ctrl.service.status.id_status == $ctrl.STATES.SERVICE.NO_CUMPLE">
+                <!--NO CUMPLE-->
+                <span>NO CUMPLE</span><i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="service-item-rate" ng-if="$ctrl.service.status.id_status == $ctrl.STATES.SERVICE.CUMPLE">
+            <div class="border color-brown center-align">
+                <span>Promedio</span><br>
+                <div class="fa fa-star star color-yellow">
+                    <span class="color-white">{{$ctrl.service.rate |number : 2}}</span>
+                </div><br>
+                <span>Calificación General</span><br>
+                <span class="full-rate color-lightgray">
+                <i class="fa fa-star" ng-class="{'color-yellow': i <= $ctrl.service.rate }" ng-repeat="i in [1,2,3,4,5]" ></i>
+            </span><br>
+                <span>{{$ctrl.service.totalcomments}} comentarios</span>
+            </div>
+            <a class="color-lightseagreen pointer" data-target="comments" modal>Ver comentarios de los ciudadanos <i class="fa fa-caret-right"></i></a>
+        </div>
+    </div>
+    <div class="valign-wrapper row requisites" ng-if="$ctrl.selected != null">
+        <button class="btn-floating waves-effect waves-light gainsboro" ng-click="$ctrl.prevQuestion()"><i class="fa fa-chevron-left"></i></button>
+        <requisite item="$ctrl.selected" on-save="$ctrl.updateAnswer(item)"></requisite>
+        <button class="btn-floating waves-effect waves-light gainsboro" ng-click="$ctrl.nextQuestion()"><i class="fa fa-chevron-right"></i></button>
+    </div>
+    <chat-entity item="$ctrl.selected" service="$ctrl.service" ng-if="$ctrl.selected.status.id == $ctrl.STATES.EVALUATION_REQUEST.RETROALIMENTACION || $ctrl.selected.status.id == $ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE || $ctrl.selected.status.id == $ctrl.STATES.EVALUATION_REQUEST.CUMPLE"></chat-entity>
+
+    <div id="comments" class="modal">
+        <div class="brown color-white">
+            <h3>Comentarios de los ciudadanos</h3>
+            <a class="pull-right modal-action modal-close" >
+                <i class="fa fa-times color-white"></i>
+            </a>
+            <div class="clearfix">
+            </div>
+        </div>
+        <div class="modal-content">
+            <comment-item ng-repeat="comment in $ctrl.service.comments" item="comment"></comment-item>
+        </div>
+    </div>
+</section>

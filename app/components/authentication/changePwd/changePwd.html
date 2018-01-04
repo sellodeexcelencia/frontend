@@ -1,0 +1,39 @@
+<div class="row">
+  <section class="wrapperForm">
+    <form name="forgotPasswordForm " ng-submit="$ctrl.updatePassword()">
+      <div class="center-align">
+        <h5>Cambio de contraseña</h5>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <input type="password" name="old" ng-model="$ctrl.old_pwd" required/>
+          <label for="old">Contraseña Actual: </label>
+        </div>
+        <div class="input-field">
+          <input type="password" name="password" ng-model="$ctrl.password" required/>
+          <label for="password">Nueva Contraseña: </label>
+        </div>
+        <div class="input-field">
+            <input type="password" name="confirm" ng-model="$ctrl.confirm" required/>
+            <label for="confirm">Confirmar Contraseña: </label>
+          </div>
+      </div>
+      <div class="center-align" style="margin-bottom:8px">
+        <span class="color-red" ng-if="$ctrl.password != $ctrl.confirm && $ctrl.confirm.length>0">Las contraseñas no coinciden</span>
+        <button type="submit" class="waves-effect waves-light btn-large" ng-class="{'display-none':$ctrl.loading || $ctrl.finished,'display-inline-block':!$ctrl.loading && !$ctrl.finished}" ng-disabled="forgotPasswordForm.$invalid">
+          <i class="material-icons right">vpn_key</i>
+          Cambiar Contraseña
+        </button>
+        <loader size="medium" ng-class="{'display-none':!$ctrl.loading,'display-inline-block':$ctrl.loading}"></loader>
+        <span class="color-green" ng-if="$ctrl.finished">Se ha cambiado la contraseña correctamente</span>
+        <span class="color-red" ng-if="$ctrl.error">La contraseña actual no es correcta</span>
+        <button type="submit" 
+          ng-click="$ctrl.goHome()" 
+          class="waves-effect waves-light btn-large brown" 
+          ng-if="$ctrl.finished">
+            Volver al sello
+          </button>
+      </div>
+    </form>
+  </section>
+</div>

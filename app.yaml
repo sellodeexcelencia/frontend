@@ -1,0 +1,33 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+service: prueba
+#default_expiration: "30d"
+
+handlers:
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /main.min.js
+  static_files: dist/main.min.js
+  upload: dist/main.min.js
+
+- url: /assets
+  static_dir: dist/assets
+
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html
+
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+- ^\node_modules$
+- ^\test$
+- ^node_modules$
+- ^app$

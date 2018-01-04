@@ -1,0 +1,86 @@
+<div class="card row activity-content">
+    <div class="col s10 offset-s1 center-align" ng-if="$ctrl.loading">
+        <loader size="medium" ng-class="{'display-none':!$ctrl.loading,'display-inline-block':$ctrl.loading}"></loader>
+    </div>
+    <div class="col m10 s10 offset-s1 offset-m1">
+        <h3 class="center-align" ng-if="$ctrl.emptyList">{{$ctrl.emptyMessage}}</h3>
+        <service-item item="service" ng-repeat="service in $ctrl.list" on-selected="$ctrl.setService(service)" on-rejected="$ctrl.setService(service)"
+            on-certificate="$ctrl.onCertificate(service)" on-upgrade="$ctrl.onUpgrade(service)" on-renew="$ctrl.onRenew(service)">
+        </service-item>
+    </div>
+    <div class="row" ng-if="$ctrl.pager.total_pages > 1">
+        <div class="col m10 s10 offset-m1 offset-s1 brown color-white pager center-align">
+            <ul>
+                <li ng-if="$ctrl.pager.before" ng-click="$ctrl.prev()">
+                    <i class="fa fa-step-backward"></i>
+                </li>
+                <li ng-repeat="page in $ctrl.pager.pages" ng-click="$ctrl.navigate(page)" ng-class="{'active':$ctrl.query.page == page}"
+                    class="page">{{page}}</li>
+                <li ng-if="$ctrl.pager.after" ng-click="$ctrl.next()">
+                    <i class="fa fa-step-forward"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a modal data-target="certificate" open="$ctrl.openCertificate"></a>
+</div>
+<a data-target='renew-selector' open="$ctrl.openRenew" id="modal-laucher" modal></a>
+<div id="renew-selector" class="modal center-align">
+    <div class="brown title">
+        <h5 class="color-white">Renueva el Sello de Excelencia</h5>
+        <a style="position:absolute;top:5px;right:5px;"class="modal-action modal-close">
+            <i class="fa fa-times color-white"></i>
+        </a>
+    </div>
+    <p class="row center-align">
+        Recuerda que debes dirigirte a la pestaña Postular y seleccionar el Servicio en Continuar con un Postulación Anterior
+    </p>
+    <div class="row center-align">
+        <button class="btn brown" type="submit" ng-click="$ctrl.onFinishRenew()" >ACEPTAR</button>
+        <button class="btn modal-action modal-close" type="button" >CANCELAR</button>
+    </div>
+</div>
+<a data-target='level-selector' open="$ctrl.openSelector" id="modal-laucher" modal></a>
+<div id="level-selector" class="modal center-align">
+    <form ng-submit="$ctrl.onFinishUpgrade()">
+    <div class="brown title">
+        <h5 class="color-white">Selecciona el nivel al que deseas subir</h5>
+        <a style="position:absolute;top:5px;right:5px;"class="modal-action modal-close">
+            <i class="fa fa-times color-white"></i>
+        </a>
+    </div>
+    <div class="modal-content">
+        <label>Nivel:</label>
+        <select ng-model="$ctrl.level" required ng-required="true">
+            <option ng-value="level" ng-repeat="level in $ctrl.levels">{{level}}</option>
+        </select>
+    </div>
+    <p class="row center-align">
+        Recuerda que debes dirigirte a la pestaña Postular y seleccionar el Servicio en Continuar con un Postulación Anterior
+    </p>
+    <div class="row center-align">
+        <button class="btn brown" type="submit" ng-disabled="!$ctrl.level" >ACEPTAR</button>
+        <button class="btn modal-action modal-close" type="button" >CANCELAR</button>
+    </div>
+    </form>
+</div>
+<div id="certificate" class="modal center-align">
+    <div class="background" alt="diploma"></div>
+    <img class="background" src="/assets/img/diploma.png" />
+    <div class="certificate-content">
+        <div class="title">CERTIFICADO</div>
+        <div class="subtitle">DE RECONOCIMIENTO</div>
+        <div class="intro">EL MINISTERIO DE TECNOLOGÍAS DE LA INFORMACIÓN Y LAS</div>
+        <div class="intro">COMUNICACIONES A TRAVÉS DE LA DIRECCIÓN DE GOBIERNO DIGITAL</div>
+        <div class="pre">CERTIFICA QUE</div>
+        <div class="entity">{{$ctrl.certificate.entity | uppercase}}</div>
+        <div class="pre">SE POSTULÓ Y CUMPLIÓ CON LOS REQUISITOS DE CALIDAD EXIGIDOS POR</div>
+        <div class="pre">EL MINISTERIO TIC, PARA EL NIVEL
+            <span class="entity">{{$ctrl.certificate.level}}</span> Y LE OTORGA EL SELLO DE EXCELENCIA</div>
+        <div class="pre">GOBIERNO DIGITAL AL PRODUCTO
+            <span class="entity">{{$ctrl.certificate.product | uppercase}}</span>
+        </div>
+    </div>
+    <div class="signature">DIRECTORA DE GOBIERNO DIGITAL</div>
+    <div class="certification-date">{{$ctrl.certificate.date | date:'dd - MMMM - yyyy'}}</div>
+</div>

@@ -1,0 +1,69 @@
+<div class="row">
+  <section class="wrapperForm">
+    <form name="signInForm" ng-submit="$ctrl.onSignIn()">
+      <h5 class="center-align">Iniciar Sesión como Ciudadano</h5>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">email</i>
+          <input type="email" name="email" ng-model="$ctrl.credentials.email" class="validate" required/>
+          <label for="email" data-error="Ingresa un email válido" data-success="Ok">Email: </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">lock</i>
+          <input type="password" name="password" ng-model="$ctrl.credentials.password" class="validate" required/>
+          <label for="password">Contraseña: </label>
+        </div>
+      </div>
+      <div class="row" ng-show="$ctrl.serverError">
+        <p class="red-text text-darken-2 center-align">
+          <i class="material-icons">error</i> {{$ctrl.errorMessage}}
+        </p>
+      </div>
+      <div class="center-align row">
+        <button type="submit" class="waves-effect waves-light btn-large" ng-class="{'display-none':$ctrl.loadding,'display-inline-block':!$ctrl.loadding}" ng-disabled="signInForm.$invalid">
+          <i class="material-icons right">chevron_right</i>
+          Entrar
+        </button>
+        <loader size="medium" ng-class="{'display-none':!$ctrl.loadding,'display-inline-block':$ctrl.loadding}"></loader>
+      </div>
+      <div class="separator center-align">
+        <h6><a ng-click="$ctrl.onForget()" class="pointer">¿Olvidaste tu contraseña?</a></h6>
+        <span class="grey-text lighten-4">
+          ¿Aún no tienes cuenta? <a ng-click="$ctrl.onSignup()" class="pointer">Crear cuenta</a>
+        </span>
+      </div>
+      <div class="row">
+          <div class="divider"></div>
+      </div>
+      <div class="center-align row">
+        <button type="button" 
+          class="waves-effect waves-light btn-large" 
+          ng-class="{'display-none':$ctrl.loadding,'display-inline-block':!$ctrl.loadding}" 
+          ng-click="$ctrl.authenticate('facebook')">
+          <i class="material-icons right">chevron_right</i>
+          Entrar con Facebook
+        </button>
+      </div>
+      <div class="center-align row">
+          <!--button type="button" 
+            class="waves-effect waves-light btn-large" 
+            ng-class="{'display-none':$ctrl.loadding,'display-inline-block':!$ctrl.loadding}" 
+            ng-click="$ctrl.authenticate('linkedin')">
+            <i class="material-icons right">chevron_right</i>
+            Entrar con LinkedIn
+          </button-->
+        </div>
+        <div class="center-align row">
+            <button type="button" 
+              class="waves-effect waves-light btn-large" 
+              ng-class="{'display-none':$ctrl.loadding,'display-inline-block':!$ctrl.loadding}" 
+              ng-click="$ctrl.authenticate('google')">
+              <i class="material-icons right">chevron_right</i>
+              Entrar con Google
+            </button>
+          </div>
+    </form>
+  </section>
+</div>

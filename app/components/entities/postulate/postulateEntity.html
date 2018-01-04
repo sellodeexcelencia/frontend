@@ -1,0 +1,120 @@
+<section class="postulate">
+  <div class="card row">
+    <div class="col s10 offset-s1">
+        <div class="row">
+            <div class="col m12 s12">
+              <h5>Continuar con una postulación anterior:</h5>
+              <div>
+                  <label>Postulaciones por finalizar:</label>
+                <select ng-model="$ctrl.service" ng-change="$ctrl.selectService()">
+                    <option ng-value="null"></option>
+                    <option ng-value="service" ng-repeat="service in $ctrl.pendingServices">{{service.name}}</option>
+                </select>
+                
+              </div>
+            </div>
+          </div>    
+    </div>
+  </div>
+  <div class="card row">
+    <form class="col m10 s10 offset-s1 offset-m1" ng-submit="$ctrl.createService()">
+      <div class="row">
+        <div class="col s12">
+            <h5>Nueva postulación:</h5>            
+            <span>Si usted se está postulando para Capacidades de Gestión de TI en </span><span class="color-brown">nombre del producto o servicio</span>
+            <span>poner nombre de la entidad y en la </span><span class="color-brown">URL del producto o servicio</span> la URL del portal web de la entidad</span>
+        </div>
+        <div class="col m6 s12">
+          <div>
+              <label>Categoría:</label>
+            <select ng-model="$ctrl.service.id_category" ng-disabled="$ctrl.service.id" ng-required="true">
+                <option ng-value="category.id" ng-repeat="category in $ctrl.categories">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col m6 s12">
+          <div>
+              <label>Nivel:</label>
+            <select ng-model="$ctrl.service.level" ng-disabled="$ctrl.service.id" ng-required="true">
+              <option ng-value="1">1</option>
+              <option ng-value="2">2</option>
+              <option ng-value="3">3</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m6 s12">
+          <div class="input-field">
+            <input id="entityname" type="text" ng-model="$ctrl.service.name" required ng-disabled="$ctrl.isUpgrade || $ctrl.isRenew">
+            <label for="entityname" data-error="Ingresa el nombre del servicio" data-success="Ok">
+                        <strong class="red-text">*</strong> Nombre del Producto o Servicio:</label>
+          </div>
+        </div>
+        <div class="col m6 s12">
+          <div class="input-field">
+            <input id="entitynit" type="text" pattern="(http://|https://)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$" class="validate" ng-model="$ctrl.service.url" required>
+            <label for="entitynit" data-error="Ingresa URL" data-success="Ok">
+                    <strong class="red-text">*</strong> URL del Producto o Servicio:</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <input type="checkbox" id="terms" ng-model="$ctrl.service.test" />
+        <label for="terms">¿Requiere Usuario de Prueba?</label>
+      </div>
+      <div class="row" ng-if="$ctrl.service.test">
+        <div class="col m6 s12">
+          <div class="input-field">
+            <input id="entityname" type="text" class="validate" ng-model="$ctrl.service.test_user">
+            <label for="entityname" data-error="Ingresa el nombre del servicio" data-success="Ok">
+                            <strong class="red-text">*</strong> Usuario de Prueba:</label>
+          </div>
+        </div>
+        <div class="col m6 s12">
+          <div class="input-field">
+            <input id="entitynit" type="text" class="validate" ng-model="$ctrl.service.test_password">
+            <label for="entitynit" data-error="Ingresa URL" data-success="Ok">
+                        <strong class="red-text">*</strong> Contraseña de Prueba:</label>
+          </div>
+        </div>
+      </div>
+      <div class="row center-align">
+        <button 
+        ng-class="{'display-none':$ctrl.loading,'display-inline-block':!$ctrl.loading}" 
+        class="btn brown" ng-disabled="$ctrl.service.id || !$ctrl.service.level || !$ctrl.service.id_category" type="submit">CREAR SERVICIO</button>
+        <button ng-class="{'display-none':$ctrl.loading,'display-inline-block':!$ctrl.loading}"class="btn brown" ng-disabled="!$ctrl.service.id" type="button"
+        ng-click="$ctrl.deleteService()"
+        >ELIMINAR POSTULACIÓN</button>
+        <loader size="medium" ng-class="{'display-none':!$ctrl.loading,'display-inline-block':$ctrl.item.loadding}"></loader>
+      </div>
+  
+    </form>
+  </div>
+  <requisite item="item" 
+    on-save="$ctrl.createAnswer(item)" 
+    ng-repeat="item in $ctrl.questions">
+  </requisite>
+  <div class="row center-align" ng-if="$ctrl.service.id">
+    <span class="color-brown">Debes completar todos los requisitos para poder postular el servicio</span><br>
+      <button ng-class="{'display-none':$ctrl.loading,'display-inline-block':!$ctrl.loading}" 
+      class="btn brown" 
+      ng-disabled="!$ctrl.canPostulate" 
+      ng-click="$ctrl.finishPostulation()"type="button">
+      POSTULAR SERVICIO</button>
+  </div>
+  <div id="postulated" class="modal">
+    <div class="modal-content center-align">
+      <div class="border">
+        <i class="fa fa-check color-green"></i><br>
+        <span class="color-brown congratulations">Has realizado una postulación</span><br>
+        <span class="color-lightseagreen">En unos instantes entrará en proceso de evaluación</span>
+      </div>
+    </div>
+    <div class="center-align footer">
+      <a class="btn brown modal-action modal-close" ng-click="$ctrl.activity()">Continuar</a>
+      <a class="btn lightseagreen modal-action modal-close" ng-click="$ctrl.clearService()">Hacer otra postulación</a>
+    </div>
+  </div>
+  <a data-target='postulated' id="modal-laucher" modal></a>
+</section>

@@ -1,0 +1,29 @@
+@import '../../colors.styl'
+
+nav 
+  background-color $gainsboro
+
+.logos
+  display: inline-block
+  margin-left: 29%
+
+.logos img
+  max-height 64px
+
+.brand-logo img
+  margin-left: 15px
+  margin-top: 15px
+
+.brand-logo small
+  text-transform uppercase
+  font-size: .6em
+  margin-left: 5px
+  vertical-align: middle
+
+@media screen and (max-width: 1000px)
+
+  .brand-logo img
+    margin-left: unset
+
+  .logos
+    display: none

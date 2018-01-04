@@ -1,0 +1,187 @@
+@import '../../../colors.styl'
+
+$badgeoutersize = 45px
+$badgeoffset = 0px
+$badgeoffsettop = -5px
+$badgesize = 40px
+$lettersize = 1.2em
+$badgeinner = 30px
+$contentletter = 0.8em
+$border = 2.5px
+
+
+$bigbadgeoutersize = 90px
+$bigbadgeoffset = 0px
+$bigbadgeoffsettop = -10px
+$bigbadgesize = 80px
+$bigbadgeinner = 60px
+$bigcontentletter = 1em
+$biglettersize = 3em
+$bigborder = 5px
+
+fame-item.big
+    padding: 0 !important
+
+.fame-item
+    position relative
+
+.fame-item .content
+    margin-left -14px
+    padding-left 30px
+    max-height: $badgesize;
+    min-height: $badgesize;
+    width calc(100% - 80px)
+    font-size $contentletter
+    overflow hidden
+
+.fame-item .content p
+    text-overflow ellipsis
+    max-height 40px
+    line-height 20px
+
+.fame-item .badge
+    background $lightgray
+
+.big .fame-item .badge
+    background $gainsboro
+
+.big .fame-item .content
+    max-height: $bigbadgesize;
+    min-height: $bigbadgesize;
+    font-size $bigcontentletter
+
+.best
+    margin-top 20px
+
+.fame-item-number-outter
+    min-width: $badgeoutersize;
+    max-width: $badgeoutersize;
+    max-height: $badgeoutersize;
+    min-height: $badgeoutersize;
+    border-radius: $badgeoutersize;
+    background: $white;
+    padding: $border;
+    box-shadow: 0px 5px 5px #888;
+    margin-top: $badgeoffsettop;
+    margin-left: $badgeoffset;
+    z-index: 2;
+
+.fame-item-number
+    max-width: $badgesize
+    max-height: $badgesize
+    min-width: $badgesize
+    min-height: $badgesize
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: solid $border;
+    background: $white;
+    font-size: $lettersize
+
+.fame-item-number-inner
+    min-height: $badgeinner
+    max-height: $badgeinner
+    min-width: $badgeinner
+    max-width: $badgeinner
+    border-radius: 100%;
+    margin: $border;
+    line-height: $badgeinner
+    text-align: center
+    color: $white
+
+.big .fame-item-number-outter
+    min-width: $bigbadgeoutersize;
+    max-width: $bigbadgeoutersize;
+    max-height: $bigbadgeoutersize;
+    min-height: $bigbadgeoutersize;
+    border-radius: $bigbadgeoutersize;
+    margin-top: $bigbadgeoffsettop;
+    margin-left: $bigbadgeoffset;
+    padding: $bigborder;
+
+.big .fame-item-number
+    max-width: $bigbadgesize
+    max-height: $bigbadgesize
+    min-width: $bigbadgesize
+    min-height: $bigbadgesize
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: solid $bigborder;
+    background: $white;
+    font-size: $biglettersize    
+
+.big .fame-item-number-inner
+    min-height: $bigbadgeinner
+    max-height: $bigbadgeinner
+    min-width: $bigbadgeinner
+    max-width: $bigbadgeinner
+    margin: $bigborder;
+    line-height: $bigbadgeinner
+
+.fame-item-number.first
+    border-color: $first
+
+.fame-item-number.second
+    border-color: $second
+
+.fame-item-number.third
+    border-color: $third
+
+.fame-item-number-inner.first
+    background: $first
+    color: $white
+
+.fame-item-number-inner.second
+    background: $second
+    color: $white
+
+.fame-item-number-inner.third
+    background: $third
+    color: $white
+
+.fame-item-number-outter.others
+    background $others
+.fame-item-number.others
+    border-color $white
+    background $others
+
+.fame-item-number-inner.others
+    background: $white
+    color: $others
+
+.fame-icon
+	position absolute
+    right 5px
+
+.fame-item .star
+    position relative
+    font-size 41px
+
+.fame-item .star span
+    display block
+    width 35px
+    height 41px
+    font-family Univers
+    font-size 14px
+    position absolute
+    top 0px
+    left 0px
+    text-align center
+    line-height 39px
+
+.big .fame-item .star
+    position relative
+    font-size 80px
+
+.big .fame-item .star span
+    display block
+    width 68px
+    height 80px
+    font-family Univers
+    font-size 21px
+    position absolute
+    top 0px
+    left 0px
+    text-align center
+    line-height 80px

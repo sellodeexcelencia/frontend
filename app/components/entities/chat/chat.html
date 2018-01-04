@@ -1,0 +1,38 @@
+<div class="card row chat">
+    <div class="title">
+        Contactar al Evaluador
+    </div>
+    <div class="col s12">
+        <ul class="evaluator-tabs">
+            <li class="col s2 item" ng-class="{active:user.id == $ctrl.currentEvaluator.id}" ng-repeat="user in $ctrl.users" ng-click="$ctrl.selectEvaluator(user)">
+                Evaluador {{$index + 1}}
+            </li>
+        </ul>
+    </div>
+    <div class="col offset-m1 s12 m10 border">
+        <div class="messages-container">
+            <div class="message" ng-repeat="message in $ctrl.messages" ng-class="{
+                mine:$ctrl.user.id == message.id_sender,
+                remote:$ctrl.user.id != message.id_sender,}">
+                <span class="bold">{{message.from.name}}</span>
+                <span class="pull-right">{{message.timestamp |date}}</span>
+                <p class="background" >
+                    {{message.text}}
+                </p>
+            </div>
+        </div>
+        <div class="row valign-wrapper userinput" >
+            <div class="input-field col m11 s11">
+                <label for="user-input">Escribe un Mensaje:</label>
+                <textarea id="user-input" ng-model="$ctrl.message"
+                ng-disabled="$ctrl.currentEvaluator == null || $ctrl.item.status.id === $ctrl.STATES.EVALUATION_REQUEST.CUMPLE || $ctrl.item.status.id === $ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE"
+                class="input-message materialize-textarea"></textarea>
+            </div>
+            <button class="col m1 s1 btn" 
+                ng-click="$ctrl.sendMessage()"
+                ng-disabled="$ctrl.currentEvaluator == null || $ctrl.item.status.id === $ctrl.STATES.EVALUATION_REQUEST.CUMPLE || $ctrl.item.status.id === $ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE">
+                <i class="fa fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>

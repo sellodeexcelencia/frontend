@@ -1,0 +1,152 @@
+
+.slider-img
+  width: 200px !important
+  background-size: none;
+  background-position: none;
+  margin-right: 15px
+
+.slider video
+  width 100%
+  max-height 400px
+  object-fit contain
+
+.slider .indicators .indicator-item.active
+    background-color: #000
+
+.slider .indicators .indicator-item
+  background-color: rgba(0,0,0,0.3)
+
+.absolute-left
+  position absolute
+  top: 150px
+  left: 0%
+  z-index: 5
+
+.absolute-right
+  position absolute
+  top: 150px
+  right: 0%
+  z-index: 5
+
+.arrow
+  color: rgba(200,200,200,0.5)
+  font-size: 100px
+
+.pointer
+  cursor: pointer
+
+.list
+  display none
+
+.list span
+  vertical-align top
+
+.display-block
+  display block
+
+.display-none
+  display none
+
+.display-inline-block
+  display: inline-block
+
+.font-bold
+  font-weight bold
+
+.slider .slides li ._caption .container
+  text-align left
+
+.slider .slides li ._caption p 
+  margin: 5px 0px
+
+.slider .slides li.down ._caption
+  padding 0px 20px
+  position absolute
+  height 150px
+  width 100%
+  background-color rgba(0,0,0,0.5)
+  top 250px
+  left 0px
+  opacity 0
+  transition opacity 0.5s linear
+
+.slider .slides li.down ._caption:hover
+  opacity 1
+
+.slider .slides li.right ._caption
+  padding-top 88px 
+  padding-left 20px
+  padding-right 50px
+  position relative
+  height 400px
+  width 400px
+  top -407px !important
+  left 251px
+  margin auto
+  background-color rgba(0,0,0,0.5)
+
+.slider video + ._caption:hover
+.slider video + ._caption
+  top 218px !important
+
+.slider .slides ._caption ._content
+  max-width 960px
+  margin auto
+
+.slider .slides li
+  text-align center
+
+.slider .slides li ._caption .summary
+  text-overflow ellipsis
+  text-align left
+
+.slider .slides li img
+  max-width 903px
+  background-size cover !important
+  background-repeat no-repeat !important
+
+.slider img.full
+  background-position: top !important;
+  background-size: cover !important;
+  background-repeat: no-repeat;
+  display: inline !important;
+
+@media screen and (max-width: 750px)
+  .absolute-left, .absolute-right
+    display: none
+  
+  .list
+    display block
+  
+  .list-images
+    display none
+  
+  .slider-img
+    width: 80px !important
+    display block
+    float unset !important
+    margin 0 auto
+  
+  ._caption
+    font-size .8em
+    opacity 1 !important
+
+  .slider .slides li img
+    background-size contain !important
+    background-repeat no-repeat !important
+    background-position top
+  .slider .slides li.down ._caption
+    height 200px
+    top 200px
+
+  .slider .slides li.right ._caption
+    padding 0px 20px
+    position absolute
+    height 200px
+    width 100%
+    top 200px !important
+    bottom 0px
+    right 0px
+    left 0px
+    margin auto
+    background-color rgba(0,0,0,0.5)

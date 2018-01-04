@@ -1,0 +1,19 @@
+<div class="white" style="margin-top:-3px">
+  <table class="striped centered responsive-table" ng-if="$ctrl.announcements.length">
+    <!--h5 style="padding:10px">Información de interés</h5-->
+    <thead>
+      <tr>
+        <th data-field="entity">Información de interés</th>
+        <th data-field="apply">Consultar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="announcement in $ctrl.announcements">
+        <td>{{announcement.entity}}</td>
+        <td><a ng-href="{{announcement.service}}" target="_blank" class="btn-floating waves-effect waves-light">
+          <i class="material-icons">chevron_right</i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

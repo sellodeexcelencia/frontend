@@ -1,0 +1,258 @@
+<section class="dataEntity">
+  <div class="card row">
+    <form class="col s10 m10 offset-s1 offset-m1" name="entityProfileForm" ng-submit="$ctrl.updateEntity()" novalidate>
+      <h4 class="color-brown">Entidad</h4>
+      <div class="col s12">
+        <span style="margin-left:-30px" class="font-bold color-lightseagreen">Información de la entidad que representas.</span>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_name" type="text" ng-model="$ctrl.institution.name" ng-disabled="true">
+            <label for="institution_name" data-error="Ingresa el nombre de la entidad" data-success="Ok">
+                  <strong class="red-text">*</strong> Nombre:
+                </label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_nit"  type="text" class="validate" ng-model="$ctrl.institution.nit" required>
+            <label for="institution_nit" data-error="Ingresa el nit de la entidad" data-success="Ok">
+                    <strong class="red-text">*</strong> Nit (con dígito de verificación):
+                  </label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_address" type="text" class="validate" ng-model="$ctrl.institution.address" required>
+            <label for="institution_address" data-error="Ingresa la dirección de la entidad" data-success="Ok">
+                      <strong class="red-text">*</strong> Dirección:
+                    </label>
+          </div>
+        </div>
+        <!--div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_website" type="url" class="validate" ng-model="$ctrl.institution.website">
+            <label for="institution_website" data-error="Ingresa el sitio web de la entidad" data-success="Ok">
+                        Sitio Web:
+                      </label>
+          </div>
+        </div-->
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_email" ng-disabled="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  type="email" ng-model="$ctrl.institution.email" required>
+            <label for="institution_email" data-error="Ingresa el correo electrónico de la entidad" data-success="Ok">
+                          <strong class="red-text">*</strong> Correo electrónico:
+                        </label>
+          </div>
+        </div>
+        <!--div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_second_email" type="email" class="validate" ng-model="$ctrl.institution.second_email" required>
+            <label for="institution_second_email" data-error="Ingresa el correo elctrónico secundario de la entidad" data-success="Ok">
+                            <strong class="red-text">*</strong> Correo electrónico secundario:
+                          </label>
+          </div>
+        </div-->
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_phone" type="text" class="validate" ng-model="$ctrl.institution.phone" required>
+            <label for="institution_phone" data-error="Ingresa el teléfono de la entidad" data-success="Ok">
+                              <strong class="red-text">*</strong> Teléfono:
+                            </label>
+          </div>
+        </div>
+        <!--div class="col s12 m6">
+          <div class="input-field">
+            <input id="institution_extension_phone" type="text" class="validate" ng-model="$ctrl.institution.extension_phone">
+            <label for="institution_extension_phone" data-error="Ingresa la extensión de la entidad" data-success="Ok">
+                                Extensión:
+                              </label>
+          </div>
+        </div-->
+        <div class="col s12 m6">
+          <div >
+              <label>Tipo de entidad:</label>
+            <select ng-model="$ctrl.institution.id_institution_type">
+                    <option ng-value="{{type.id}}" ng-repeat="type in $ctrl.institutionTypes">{{type.name}}</option>
+                  </select>
+            
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div >
+              <label>País:</label>
+            <select ng-model="$ctrl.institution.id_country" ng-change="$ctrl.getRegions('institution')">
+                        <option ng-value="{{country.id}}" ng-repeat="country in $ctrl.countries">{{country.name}}</option>
+                      </select>
+            
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div >
+              <label>Región:</label>
+            <select ng-model="$ctrl.institution.id_region" ng-change="$ctrl.getCities('institution')" >
+                          <option ng-value="{{region.id}}" ng-repeat="region in $ctrl.institutionregions">{{region.name}}</option>
+                        </select>
+            
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div>
+              <label>Ciudad:</label>
+            <select ng-model="$ctrl.institution.id_city">
+                          <option ng-value="{{city.id}}" ng-repeat="city in $ctrl.institutioncities">{{city.name}}</option>
+                        </select>
+            
+          </div>
+        </div>
+      </div>
+      <div class="row center-align">
+        <button type="submit" class="waves-effect waves-light btn-large" ng-disabled="entityProfileForm.$invalid">
+              <i class="material-icons right">send</i>Actualizar
+            </button>
+      </div>
+    </form>
+  </div>
+  <div class="card row">
+    <form class="col s10 m10 offset-s1 offset-m1" name="entityUserProfileForm" ng-submit="$ctrl.updateUser()" novalidate>
+      <h4 class="color-brown">Representante</h4>
+      <div class="col s12">
+        <span style="margin-left:-30px" class="font-bold color-lightseagreen">Información personal.</span>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="first_name" type="text" class="validate" ng-model="$ctrl.register.name" required>
+            <label for="first_name" data-error="Ingresa tu nombre" data-success="Ok"><strong class="red-text">*</strong> Primer Nombre:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="second_name" type="text" class="validate" ng-model="$ctrl.register.secondname">
+            <label for="second_name" data-error="Ingresa tu segundo nombre" data-success="Ok">Segundo Nombre:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="lastname" type="text" class="validate" ng-model="$ctrl.register.lastname" required>
+            <label for="lastname" data-error="Ingresa tu primer apellido" data-success="Ok"><strong class="red-text">*</strong> Primer Apellido:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="second_lastname" type="text" class="validate" ng-model="$ctrl.register.secondlastname" required>
+            <label for="second_lastname" data-error="Ingresa tu segundo apellido" data-success="Ok"><strong class="red-text">*</strong> Segundo Apellido:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="phone" type="text" class="validate" ng-model="$ctrl.register.phone" required>
+            <label for="phone" data-error="Ingresa tu teléfono" data-success="Ok"><strong class="red-text">*</strong> Teléfono:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="mobile" pattern="\d+$" type="text" class="validate" ng-model="$ctrl.register.mobile" required>
+            <label for="mobile" data-error="Ingresa tu celulcar" data-success="Ok"><strong class="red-text">*</strong> Teléfono móvil:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div >
+              <label>Tipo de documento:</label>
+            <select ng-model="$ctrl.register.id_type_document">
+                  <option ng-value="{{typedoc.id}}" ng-repeat="typedoc in $ctrl.document_types">{{typedoc.name}}</option>
+                </select>
+            
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="numberType" type="text" class="validate" ng-model="$ctrl.register.document" required>
+            <label for="numberType" data-error="Ingresa un número de identificación válido" data-success="Ok"><strong class="red-text">*</strong> Numero de documento:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div>
+            <label>País:</label>
+            <select ng-model="$ctrl.register.id_country" ng-change="$ctrl.getRegions()">
+                    <option ng-value="{{country.id}}" ng-repeat="country in $ctrl.countries">{{country.name}}</option>
+                  </select>
+            
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div>
+              <label>Región:</label>
+              <select ng-model="$ctrl.register.id_region" ng-change="$ctrl.getCities()">
+                      <option ng-value="{{region.id}}" ng-repeat="region in $ctrl.registerregions">{{region.name}}</option>
+                    </select>
+            
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div>
+              <label>Ciudad:</label>
+            <select ng-model="$ctrl.register.id_city">
+                      <option ng-value="{{city.id}}" ng-repeat="city in $ctrl.registercities">{{city.name}}</option>
+                    </select>
+            
+          </div>
+        </div>
+        <div class="col m6 s12">
+          <div class="input-field">
+            <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="validate" ng-model="$ctrl.register.email" required>
+            <label for="email" data-error="Ingresa un correo válido" data-success="Ok"><strong class="red-text">*</strong> Correo electrónico:</label>
+          </div>
+        </div>
+      </div>
+
+
+      <!--div class="row">
+        <div class="col s12">
+          <span style="margin-left:-30px" class="font-bold color-lightseagreen">Información laboral.</span>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="job" type="text" class="validate" ng-model="$ctrl.register.ocupation" required>
+            <label for="job" data-error="Ingresa ocupación" data-success="Ok"><strong class="red-text">*</strong> Ocupación:</label>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="input-field">
+            <input id="company" type="text" class="validate" ng-model="$ctrl.register.organization" required>
+            <label for="company" data-error="Ingresa tu primer apellido" data-success="Ok"><strong class="red-text">*</strong> Organización:</label>
+          </div>
+        </div>
+
+      </div-->
+      <div class="row center-align">
+        <input type="checkbox" id="terms" ng-click="$ctrl.register.terms == 1 ? $ctrl.register.terms= 0:$ctrl.register.terms=1" ng-checked="$ctrl.register.terms == 1"
+        />
+        <label for="terms">
+                <a href="/assets/sello.pdf" target="_blank">
+                        <strong class="red-text">*</strong>
+                        Acepto los términos y condiciones</a>
+                      </label>
+      </div>
+      <div class="row center-align">
+        <button type="submit" class="waves-effect waves-light btn-large" ng-disabled="entityUserProfileForm.$invalid || !$ctrl.register.terms">
+                            <i class="material-icons right">send</i>
+                            Actualizar
+                          </button>
+      </div>
+    </form>
+    <a modal data-target="confirm" open="$ctrl.openConfirmation"></a>
+    <div id="confirm" class="modal">
+      <div class="modal-content center-align">
+        <div class="border">
+          <i class="fa fa-check color-green"></i><br>
+          <span class="color-brown congratulations">Tus datos se han actualizado correctamente</span><br>
+        </div>
+      </div>
+      <div class="center-align footer">
+        <a class="btn brown modal-action modal-close">Cerrar</a>
+      </div>
+    </div>
+  </div>
+</section>

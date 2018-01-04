@@ -1,0 +1,60 @@
+<section class="postulateEvaluator">
+
+    <div class="card row activity-content" ng-if="!$ctrl.service">
+        <div class="search col s12">
+            <div class="col m3 s12">
+                <!--input ng-model="$ctrl.query.entity" placeholder="Nombre de la entidad"></input-->
+                <autocomplete on-selected="$ctrl.selectedInstitution(item)" endpoint="$ctrl.institutionEndpoint" placeholder="Entidad"></autocomplete>
+            </div>
+            <div class="col m3 s12">
+                <!--input ng-model="$ctrl.query.department" placeholder="Departamento"></input-->
+                <autocomplete on-selected="$ctrl.selectedCountry(item)" endpoint="$ctrl.countryEndpoint" placeholder="País"></autocomplete>
+            </div>
+            <div class="col m3 s12">
+                <!--input ng-model="$ctrl.query.department" placeholder="Departamento"></input-->
+                <autocomplete on-selected="$ctrl.selectedRegion(item)" endpoint="$ctrl.regionEndpoint" placeholder="Departamento"></autocomplete>
+            </div>
+            <div class="col m2 s12">
+                <select ng-model="$ctrl.query.fields['category.id']" ng-change="$ctrl.getData()">
+                            <option ng-value="null" selected>Todas las categorías</option>
+                            <option ng-value="{{category.id}}" ng-repeat="category in $ctrl.categories">{{category.name}}</option>
+                        </select>
+            </div>
+            <div class="col m2 s12">
+                <select ng-model="$ctrl.query.fields.level" ng-change="$ctrl.getData()">
+                            <option ng-value="null" selected>Todos los niveles</option>
+                            <option value="1" >1</option>
+                            <option value="2" >2</option>
+                            <option value="3" >3</option>
+                        </select>
+
+            </div>
+        </div>
+
+        <div class="col s10 offset-s1">
+            <h4>{{$ctrl.entity.name}}</h4>
+            <div class="row">
+                <h3 class="center-align" ng-if="$ctrl.noTopics">Debes seleccionar al menos una categoría y temática para acceder al listado de postulaciones</h3>
+                <h3 class="center-align" ng-if="$ctrl.emptyTopics">En el momento no existen postulaciones relacionadas con la categoría y temática seleccionadas</h3>
+                <requisite-item class="col m6 s12" categories="$ctrl.categories" item="requisite" ng-repeat="requisite in $ctrl.list" may-apply="true" on-selected="$ctrl.confirm(requisite)">
+                </requisite-item>
+            </div>
+        </div>
+        <div class="row" ng-if="$ctrl.pager.total_pages > 1">
+            <div class="col m10 s10 offset-m1 offset-s1 brown color-white pager center-align">
+                <ul>
+                    <li ng-if="$ctrl.pager.before" ng-click="$ctrl.prev()">
+                        <i class="fa fa-step-backward"></i>
+                    </li>
+                    <li ng-repeat="page in $ctrl.pager.pages" ng-click="$ctrl.navigate(page)" 
+                    ng-class="{'active':$ctrl.query.page == page}" class="page">{{page}}</li>
+                    <li ng-if="$ctrl.pager.after" ng-click="$ctrl.next()">
+                        <i class="fa fa-step-forward"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a modal data-target="confirm" open="$ctrl.openConfirmation"></a>
+    </div>
+    
+</section>

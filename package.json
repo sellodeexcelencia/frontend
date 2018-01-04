@@ -1,0 +1,66 @@
+{
+  "name": "quality-stamp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicación que permite postular, publicar, verificar y validar los requisitos de calidad de los trámites, servicios, productos y capacidades de las entidades del estado.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "node_modules/.bin/webpack-dev-server",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress --config webpack.config.prod.js",
+    "production": "node_modules/.bin/http-server dist/ -p 9000",
+    "pretest": "npm run build",
+    "test": "npm run style",
+    "style": "node_modules/.bin/eslint app"
+  },
+  "keywords": [
+    "Sello",
+    "calidad",
+    "productos",
+    "servicios",
+    "estado",
+    "minTIC"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/domoti/quality-stamp/"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "author": "Domoti SAS <jorge.calle@domoti-sas.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.0",
+    "eslint": "^3.12.0",
+    "eslint-loader": "^1.6.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "http-server": "^0.9.0",
+    "ng-annotate-loader": "^0.2.0",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.3",
+    "webpack-dashboard": "^0.2.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "angular": "^1.5.9",
+    "angular-animate": "^1.5.9",
+    "angular-materialize": "^0.2.1",
+    "angular-toastr": "^2.1.1",
+    "angular-ui-router": "^1.0.0-alpha.5",
+    "ng-file-upload": "^12.2.13",
+    "satellizer": "^0.15.5",
+    "angular-i18n": "^1.5.9"
+  }
+}

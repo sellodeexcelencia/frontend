@@ -1,0 +1,51 @@
+.bannerdetail
+  padding 10px
+
+.bannerdetail .banner
+  position relative
+  height 400px
+  overflow hidden
+
+.bannerdetail .banner ._caption
+  padding-top 88px 
+  padding-left 20px
+  padding-right 50px
+  position absolute
+  height 400px
+  width 45%
+  top 0px
+  left 45%
+
+.bannerdetail video
+  width 100%
+  max-width 903px
+  height 400px
+  margin auto
+  object-fit contain
+  display block
+
+.bannerdetail img
+  width 100%
+  max-width 903px
+  height 400px
+  margin auto
+  object-fit cover
+  display block
+
+@media screen and (max-width: 750px)
+  .bannerdetail img
+    object-fit contain
+    object-position top
+
+  .bannerdetail .banner ._caption
+    padding 0px 20px
+    position absolute
+    height 200px
+    width 100%
+    top 180px
+    left 0px
+  
+  .bannerdetail .banner ._caption h5
+    color #5f676a !important
+  .bannerdetail .banner ._caption p
+    color #5f676a !important

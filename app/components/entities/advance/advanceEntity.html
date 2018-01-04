@@ -1,0 +1,127 @@
+<div class="card row advanceEvaluator">
+    <div class="col m10 offset-m1 s10 offset-s1 points">
+
+        <div class="col m3 s6 center-align">
+            <div class="point card">
+                <div class="lightseagreen color-white ">
+                    Mi puntaje
+                </div>
+                <div class="fa fa-certificate star color-yellow">
+                    <span class="color-white">{{$ctrl.total |number : 0}}</span>
+                </div>
+                <br>
+                <span>Total Puntos</span>
+            </div>
+        </div>
+
+        <div class="col m3 s6 center-align">
+            <div class="point card">
+                <div class="lightseagreen color-white ">
+                    Actividades
+                </div>
+                <div class="fa fa-check-circle star color-points">
+                    <span class="color-darkgray">{{$ctrl.requisites |number : 0}}</span>
+                </div>
+                <br>
+                <span>Postulaciones y Certificaciones</span>
+            </div>
+        </div>
+
+        <div class="col m3 s6 center-align">
+            <div class="point card">
+                <div class="lightseagreen color-white ">
+                    Participaciones
+                </div>
+                <div class="fa fa-play-circle star color-points">
+                    <span class="color-darkgray">{{$ctrl.live |number : 0}}</span>
+                </div>
+                <br>
+                <span>Aprende y Enseña</span>
+            </div>
+        </div>
+
+        <div class="col m3 s6 center-align">
+            <div class="point card">
+                <div class="lightseagreen color-white ">
+                    Eventos Especiales
+                </div>
+                <div class="fa fa-users users star color-points">
+                    <span class="color-darkgray">{{$ctrl.events |number : 0}}</span>
+                </div>
+                <br>
+                <span>Participaciones</span>
+            </div>
+        </div>
+        <div class="row">
+            <a class="pull-right color-lightseagreen" data-target="lost" modal>Ver detalle de puntos
+                <i class="fa fa-caret-right"></i>
+            </a>
+        </div>
+    </div>
+
+
+
+    <div class="col m10 offset-m1 s10 offset-s1 ">
+        <h3 class="color-brown">¿Cómo funciona el sistema de puntuación?</h3>
+        <ul>
+            <li ng-repeat="motive in $ctrl.motives" ng-if="motive.public">
+                <span ng-if="motive.points < 0" class="color-red">( - ) {{motive.description}}</span>
+                <span ng-if="motive.points >= 0">( + ) {{motive.description}}</span>
+            </li>
+        </ul>
+    </div>
+    <div id="lost" class="modal">
+        <div class="row">
+            <div class="col s12 brown color-white">
+                <span>Resumen de Puntos</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s10 offset-s1">
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th data-field="timestamp">Fecha</th>
+                            <th data-field="text">Concepto</th>
+                            <th data-field="points">Puntos</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="negative in $ctrl.negatives">
+                            <td> {{negative.timestamp | date:'dd/MM/yyyy hh:mm a'}}</td>
+                            <td>
+                                <span ng-if="negative.value > 0">
+                                    <i class="fa fa-plus-circle color-green"></i> {{negative.justification}}
+                                </span>
+                                <span ng-if="negative.value < 0">
+                                    <i class="fa fa-minus-circle color-red"></i> {{negative.justification}}
+                                </span>
+
+                            </td>
+                            <td ng-class="{'color-red':negative.value < 0}"> {{negative.value}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" ng-if="$ctrl.pager.total_pages > 1">
+            <div class="col m10 s10 offset-m1 offset-s1 brown color-white pager center-align">
+                <ul>
+                    <li ng-if="$ctrl.pager.before" ng-click="$ctrl.prev()">
+                        <i class="fa fa-step-backward"></i>
+                    </li>
+                    <li ng-repeat="page in $ctrl.pager.pages" ng-click="$ctrl.navigate(page)" ng-class="{'active':$ctrl.query.page == page}"
+                        class="page">{{page}}</li>
+                    <li ng-if="$ctrl.pager.after" ng-click="$ctrl.next()">
+                        <i class="fa fa-step-forward"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row center-align">
+            <a class="btn brown modal-action modal-close">CERRAR</a>
+        </div>
+    </div>
+</div>

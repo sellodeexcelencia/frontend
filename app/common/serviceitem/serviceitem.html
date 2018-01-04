@@ -1,0 +1,73 @@
+<div class="row service-item">
+    <div class="badge gainsboro center-align">
+        <div alt="badge" class="fame-icon category-{{$ctrl.item.id_category}} level-{{$ctrl.item.status.level}}"></div>
+        <div class="lightseagreen color-white">
+            <span>Nivel: </span>
+            <span>{{$ctrl.item.status.level}}</span>
+        </div>
+    </div>
+    <div class="service-item-content">
+        <div class="brown color-white">{{$ctrl.item.id}} - {{$ctrl.item.category.name}}</div>
+        <div class="gainsboro row">
+            <div class="content">
+                <div>{{$ctrl.item.name}}</div>
+                <div ng-if="$ctrl.item.certified">
+                    <span>Fecha de cerficación: </span>
+                    <span>{{$ctrl.item.status.timestamp | date}}</span>
+                    <br>
+                    <span>Fecha de vigencia: </span>
+                    <span>{{$ctrl.item.status.valid_to | date}}</span>
+                </div>
+                <div ng-if="($ctrl.item.status.id_status==$ctrl.STATES.SERVICE.INCOMPLETO || $ctrl.item.status.id_status==$ctrl.STATES.SERVICE.VERIFICACION) && !$ctrl.item.certified">
+                    <span>Fecha de postulación: </span><span>{{$ctrl.item.status.timestamp | date}}</span>
+                    <br>
+                    <span>Plazo de validación: </span><span>{{$ctrl.item.status.valid_to | date}}</span>
+                </div>
+                <div ng-if="($ctrl.item.status.id_status==$ctrl.STATES.SERVICE.EVALUACION) && !$ctrl.item.certified">
+                    <span>Fecha de validación: </span><span>{{$ctrl.item.status.timestamp | date}}</span>
+                    <br>
+                    <span>Plazo de evaluación: </span><span>{{$ctrl.item.status.valid_to | date}}</span>
+                </div>
+                <div ng-if="($ctrl.item.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE) && !$ctrl.item.certified">
+                    <span>Fecha de evaluación: </span><span>{{$ctrl.item.status.timestamp | date}}</span>
+                    <br>
+                </div>
+            </div>
+            <div class="action color-green center-align" ng-click="$ctrl.onRenew()" ng-if="$ctrl.item.current_status == $ctrl.STATES.SERVICE.CUMPLE || $ctrl.item.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE && $ctrl.item.certified">
+                <!--i class="fa fa-download"></i-->
+                <i class="material-icons" style="font-size: 31px;">autorenew</i>
+                <br>
+                <span>Renovar</span>
+            </div>
+            <div class="action color-green center-align" ng-click="$ctrl.onUpgrade($ctrl.item)" ng-if="$ctrl.item.current_status == $ctrl.STATES.SERVICE.CUMPLE || $ctrl.item.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE && $ctrl.item.certified">
+                <!--i class="fa fa-download"></i-->
+                <i class="material-icons" style="font-size: 31px;">trending_up</i>
+                <br>
+                <span>Subir Nivel</span>
+            </div>
+            <div class="action color-green center-align" ng-click="$ctrl.onCertificate($ctrl.item)" ng-if="$ctrl.item.certified">
+                <!--i class="fa fa-download"></i-->
+                <i class="material-icons" style="font-size: 31px;">file_download</i>
+                <br>
+                <span>Descargar Diploma</span>
+            </div>
+            <div class="action color-red center-align" ng-click="$ctrl.onRejected($ctrl.item)" 
+                ng-if="$ctrl.item.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE && !$ctrl.item.certified">
+                <i class="fa fa-times"></i>
+                <br>
+                <span>No Cumple</span>
+            </div>
+            <div class="action color-lightseagreen center-align" ng-click="$ctrl.onSelected($ctrl.item)" 
+            ng-if="$ctrl.item.current_status == $ctrl.STATES.SERVICE.VERIFICACION
+                || $ctrl.item.current_status == $ctrl.STATES.SERVICE.EVALUACION
+                || $ctrl.item.certified">
+                <i class="fa fa-chevron-circle-right"></i>
+                <br>
+                <span>{{ $ctrl.item.status.id == $ctrl.STATES.SERVICE.VERIFICACION ? 'Ver Detalle': 
+                    $ctrl.item.status.id == $ctrl.STATES.SERVICE.EVALUACION ? 'Ver Progreso': 'Ver Detalle'
+                    }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

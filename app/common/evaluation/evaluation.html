@@ -1,0 +1,93 @@
+<div class="evaluation white">
+    <sign-in-citizen on-forget="$ctrl.onForget()" on-signup="$ctrl.onSignUp()" 
+        ng-if="$ctrl.signIn && !$ctrl.isAuthenticated()"></sign-in-citizen>
+    <sign-up-citizen on-forget="$ctrl.onForget()" on-signin="$ctrl.onSignIn()" 
+        ng-if="$ctrl.signUp && !$ctrl.isAuthenticated()"></sign-up-citizen>
+    <forgot-password-citizen ng-if="$ctrl.forget && !$ctrl.isAuthenticated()"
+    on-signin="$ctrl.onSignIn()"></forgot-password-citizen>
+    <div ng-if="!$ctrl.finished && $ctrl.isAuthenticated()">
+        <form ng-submit="$ctrl.qualify()">
+        <div class="row center-align">
+            Ahora puedes participar calificando y comentando sobre<br> nuestros productos ó servicios certificados
+        </div>
+        <div class="brown center-align color-white">
+            Entidad: {{$ctrl.service.institution.name}}
+        </div>
+        <div class="gainsboro center-align">
+            <span class="color-brown">Producto o servicio:</span>
+            <span class="color-brown">{{$ctrl.service.name}}</span>
+        </div>
+        <div class="row info">
+            <div class="col m6 s12">
+                <div class="border center-align">
+                    <span class="color-brown">Calificación General</span><br>
+                    <span class="full-rate">
+                    <i class="fa fa-star" ng-class="{'color-yellow': i <= $ctrl.service.rate }" ng-repeat="i in [1,2,3,4,5]" ></i>
+                </span><br>
+                    <span>{{$ctrl.service.votes}} Votos</span>
+                </div>
+            </div>
+            <div class="col m6 s12">
+                <div class="border center-align">
+                    <span class="color-brown">Promedio</span><br>
+                    <div class="fa fa-star star">
+                        <span class="color-white">{{$ctrl.service.rate |number : 2}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row questions">
+            <div class="col s12 m12 lightseagreen color-white center-align">
+                Responde las Preguntas
+            </div>
+            <div class="col s12 m12" ng-repeat="question in $ctrl.questions" ng-class="{'gainsboro':$odd}">
+                <span><i class="fa fa-check color-green"></i></span>
+                <span class="question-text" ng-class="{'color-red':question.error}">{{question.text}}</span>
+                <span class="full-rate right color-lightgray">
+                <i class="fa fa-star" 
+                ng-class="{'color-yellow': i <= question.rate }"
+                ng-repeat="i in [1,2,3,4,5]" 
+                ng-click="question.rate = i"
+                ></i>
+            </span>
+            </div>
+        </div>
+        <div class="row comment">
+            <div class="col m6 s12">
+                <span class="color-lightseagreen">
+                Agrega un comentario
+            </span>
+            
+            <textarea id="comment" class="materialize-textarea" 
+
+                ng-class="{error:$ctrl.errorComment}"
+                ng-model="$ctrl.comment"
+                required></textarea>
+            
+            </div>
+            <div class="col m6 s12 legal">
+                El producto que usted está viendo ha sido certificado con EL SELLO DE EXCELENCIA, y queremos que usted sea parte de esta
+                experiencia.<br> Lo invitamos a calificar y dejar sus comentarios y su opinión.
+            </div>
+        </div>
+        <div class="center-align footer">
+            <button type="submit" class="btn" >Calificar</button>
+        </div>
+    </form>
+    </div>
+    <div ng-if="$ctrl.finished && !$ctrl.error" class="center-align finished">
+        <h3 class="color-brown center-align">Tu valoración ha sido enviada</h3>
+        <div class="thanks color-lightseagreen center-align">Gracias por tu colaboración</div>
+        <img class="center-align" src="assets/img/evaluando.png" alt="evaluados">
+        <div class="center-align">Tu opinión es muy importante para continuar mejorando<br>la calidad de nuestras entidades.</div>
+        <a class="btn brown" ng-click="$ctrl.close()">Cerrar</a>
+    </div>
+    <div ng-if="$ctrl.finished && $ctrl.error" class="center-align finished">
+            <h3 class="color-brown center-align">Ya has calificado este servicio.</h3>
+            <div class="thanks color-lightseagreen center-align">Te invitamos a continuar calificando otros servicios certificados</div>
+            <img class="center-align" src="assets/img/evaluando.png" alt="evaluados">
+            <div class="center-align">Tu opinión es muy importante para continuar mejorando<br>la calidad de nuestras entidades.</div>
+            <a class="btn brown" ng-click="$ctrl.close()">Cerrar</a>
+        </div>
+        <a class="modal-action modal-close"></a>
+</div>

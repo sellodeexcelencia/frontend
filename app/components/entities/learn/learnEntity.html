@@ -1,0 +1,75 @@
+<section class="learn">
+        <script>window.fbAsyncInit = function() {
+                FB.init({
+                  xfbml      : true,
+                  version    : 'v2.5'
+                });
+                }; (function(d, s, id){
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) {return;}
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+        
+    <div class="card row" ng-if="!$ctrl.playing">
+        <div class="row featured">
+            <div class="col m4 s12 left">
+                <div class="brown color-white">
+                    Próximo Live:
+                </div>
+                <div class="image">
+                    <img ng-src="{{$ctrl.selected.image}}" alt="{{$ctrl.selected.name}}">
+                </div>
+            </div>
+            <div class="col m6 s12">
+                <h3 class="color-brown">{{$ctrl.selected.name}}</h3>
+                <span class="color-black">{{$ctrl.selected.description}}</span><br>
+                <span>{{$ctrl.selected.date | date}}</span><br>
+                <!--a class="btn" ng-href="{{$ctrl.selected.url}}" ng-click="$ctrl.goLive()"target="_blank">Entrar al live</a><br-->
+                <a class="btn" ng-click="$ctrl.goLive()" ng-disabled="$ctrl.selected.disabled">Entrar al live</a><br>
+                <small class="pull-left" ng-if="$ctrl.selected.disabled">*El enlace será habilitado en el momento de comenzar la transmisión</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m4 s12  learnitem" ng-repeat="item in $ctrl.list" ng-click="$ctrl.setSelected(item)">
+                <div class="gainsboro row learnitem-content valign-wrapper">
+                    <div class="image col m4 s4">
+                        <img ng-src="{{item.image}}" alt="{{item.name}}">
+                    </div>
+                    <div class="col m8 s8">
+                        <span class="color-brown">{{item.name}}</span>
+                        <span>{{item.description}}</span><br>
+                        <span>{{item.date | date}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s10 offset-s1" ng-if="$ctrl.pager.total_pages > 1">
+            <div class="row brown color-white pager center-align">
+                <ul>
+                    <li ng-if="$ctrl.pager.before" ng-click="$ctrl.prev()">
+                        <i class="fa fa-step-backward"></i>
+                    </li>
+                    <li ng-repeat="page in $ctrl.pager.pages" ng-click="$ctrl.navigate(page)" 
+                    ng-class="{'active':$ctrl.query.page == page}" class="page">{{page}}</li>
+                    <li ng-if="$ctrl.pager.after" ng-click="$ctrl.next()">
+                        <i class="fa fa-step-forward"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card row" ng-if="$ctrl.playing">
+        <div class="fb-video" data-href="{{$ctrl.selected.url}}" 
+        ng-if="$ctrl.selected.url.indexOf('facebook')>-1" data-allowfullscreen="true"></div>
+        
+        <iframe ng-if="$ctrl.selected.url.indexOf('youtube')>-1" ng-src="{{$ctrl.selected.trusted}}" frameborder="0" allowfullscreen></iframe>
+        <div class="row center-align">
+            <button class="btn brown" ng-click="$ctrl.stop()">VOLVER AL LISTADO</button>
+        </div>
+        
+    </div>
+    
+</section>

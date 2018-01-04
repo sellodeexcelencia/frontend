@@ -1,0 +1,27 @@
+<section class="activity">
+    <div class="row activity-tabs" ng-if="!$ctrl.service">
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'certified'}" ng-click="$ctrl.setSection('certified')">
+            <div class="center-align">
+                Sellos Otorgados
+            </div>
+        </div>
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'validation'}" ng-click="$ctrl.setSection('validation')">
+            <div class="center-align">
+                En Validación
+            </div>
+        </div>
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'proccess'}" ng-click="$ctrl.setSection('proccess')">
+            <div class="center-align">
+                En Proceso
+            </div>
+        </div>
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'rejected'}" ng-click="$ctrl.setSection('rejected')">
+            <div class="center-align">
+                No Otorgados
+            </div>
+        </div>
+    </div>
+    <div ui-view>
+
+    </div>
+</section>

@@ -1,0 +1,20 @@
+<section class="container white z-depth-1 wrapper-margin-top-padding bannerdetail">
+    <div class="white banner">
+        <video ng-if="$ctrl.banner.video" style="background-color:#000;" 
+          ng-src="{{$ctrl.banner.video}}" 
+          ng-poster="{{$ctrl.banner.background}}" 
+          controls muted></video>
+        <img ng-if="!$ctrl.banner.video && $ctrl.banner.background" 
+        ng-src="{{$ctrl.banner.background}}" />
+        <div ng-if="$ctrl.banner.id_type_banner == 3" class="_caption">
+            <div class="_content">
+                <h5 class="color-white font-bold">{{$ctrl.banner.title}}</h5>
+                <p class="color-white summary">{{$ctrl.banner.summary}}</p>
+            </div>
+        </div>
+    </div>
+    <h5 class="font-bold">{{$ctrl.banner.title}}</h5>
+    <div class="content" ta-bind ng-bind-html="$ctrl.banner._trusted">
+    </div>
+</section>
+<footer-app></footer-app>

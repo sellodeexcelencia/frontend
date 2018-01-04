@@ -1,0 +1,55 @@
+@import '../../colors.styl'
+
+.servicelist .title
+    margin-bottom 0px
+    z-index 5
+.servicelist .title h3
+    margin 5px 0px
+.servicelist .logo
+    margin-top 0px
+    padding-top 10px
+    z-index 2
+.servicelist .service-item
+    cursor pointer
+.servicelist .service-item:hover
+    background $footergray
+.servicelist .search-label
+    padding-top 13px
+.servicelist .search a
+    margin 5px
+.servicelist .search input
+    background $white
+    border-radius 10px
+    margin 7px 0px
+    height 35px
+    line-height 35px
+    padding 0px 5px
+.servicelist .category-button
+    font-size 0.8em
+    line-height 18px
+    text-overflow ellipsis
+    overflow hidden
+.servicelist .pager ul
+    list-style-type none
+    clear both
+    padding 10px 10px
+    margin 0px
+.servicelist .pager ul li
+    display inline
+    cursor pointer
+    padding 5px
+.servicelist .pager ul li.page
+    color rgba(255,255,255,0.6)
+.servicelist .pager ul li.page.active
+    color $white
+.servicelist .download
+    font-size 1.2em
+    cursor pointer
+
+.servicelist tbody tr
+    cursor pointer
+
+.servicelist .service-table-item .url
+    max-width 220px
+    text-overflow ellipsis
+    overflow hidden

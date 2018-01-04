@@ -1,0 +1,10 @@
+<div class="autocomplete-wrapper">
+    <input 
+        ng-model="$ctrl.query.filter"
+        ng-change="$ctrl.getData()"
+        placeholder="{{$ctrl.placeholder}}"
+        ></input>
+    <ul class="autocomplete-content dropdown-content" style="position:absolute">
+        <li ng-repeat="item in $ctrl.list" ng-click="$ctrl.select(item)"><span>{{item.name}}</span></li>
+    </ul>
+</div>

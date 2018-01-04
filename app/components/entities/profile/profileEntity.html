@@ -1,0 +1,41 @@
+<div class="profileEntity">
+    <div class="container">
+        <div class="card white color-brown row title">
+            <h3><i class="fa fa-building-o"></i>{{$ctrl.user.institutions[0].name}}</h3>
+        </div>
+        <div class="row">
+            <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'profile'}" ng-click="$ctrl.setSection('profile')">
+                <div class="center-align">
+                    <i class="fa fa-building-o"></i>Perfil
+                </div>
+            </div>
+            <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'postulate'}" ng-click="$ctrl.setSection('postulate')">
+                <div class="center-align">
+                    Postular
+                </div>
+            </div>
+            <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'activity'}" ng-click="$ctrl.setSection('activity')">
+                <div class="center-align">
+                    Actividad
+                </div>
+            </div>
+            <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'learn'}" ng-click="$ctrl.setSection('learn')">
+                <div class="center-align">
+                    Aprende y Enseña
+                </div>
+            </div>
+            <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'advance'}" ng-click="$ctrl.setSection('advance')">
+                <div class="center-align">
+                    Mi Avance
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container" ui-view>
+        
+    </div>
+</div>
+
+<footer-app></footer-app>

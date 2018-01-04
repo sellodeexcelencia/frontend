@@ -1,0 +1,111 @@
+<form class="card row requisite" ng-submit="$ctrl.save()">
+    <div class="row">
+        <div class="col m10 s10 offset-m1 offset-s1">
+            <div class="row">
+                <div class="col m8 s12 requisite-title">
+                    <span class="color-brown">{{$ctrl.item.id}} - {{$ctrl.item.text}}</span>
+                </div>
+                <div class="col m4 s12 right-align tips" >
+                    <div class="color-red" ng-if="$ctrl.item.error" tooltipped data-position="top" data-tooltip="Este Requisito tiene errores"
+                        data-delay="150">
+                        <span>Este requisito ha sido rechazado</span>
+                        <i class="fa fa-exclamation-triangle"></i>
+                    </div>
+                    <div ng-if="$ctrl.item.legal_support && $ctrl.item.legal_support !== ''"  >
+                        <span 
+                        ng-click="$ctrl.showLegal()">Sustento Legal o Técnico</span>
+                        <i ng-click="$ctrl.showLegal()" class="fa fa-book"></i>
+                        <div class="black color-white tip" ng-show="$ctrl._legal">
+                            {{$ctrl.item.legal_support}}
+                        </div>
+                    </div>
+                    <div ng-if="$ctrl.item.help && $ctrl.item.help !== ''">
+                        <span ng-click="$ctrl.showHelp()">Ayuda</span>
+                        <i ng-click="$ctrl.showHelp()" class="fa fa-question-circle"></i>
+                        <div class="black color-white tip" ng-show="$ctrl._help">
+                            {{$ctrl.item.help}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col m6 s12">
+                <div class="gainsboro content">
+                    <span class="color-brown">Criterio:</span><br> {{$ctrl.item.criteria}}
+                </div>
+            </div>
+            <div class="col m6 s12 ">
+                <div class="gainsboro content">
+                    <span class="color-brown">Evidencia:</span><br> {{$ctrl.item.evidence}}
+                </div>
+            </div>
+        </div>
+        <div class="col m10 s10 offset-m1 offset-s1" ng-if="!$ctrl.item.disabled">
+            <div class="input-field col s12">
+                <label for="comments" class="color-brown">Descripción de la evidencia:</label>
+                <textarea id="comments" ng-model="$ctrl.item.comment" class="materialize-textarea validate" required></textarea>
+            </div>
+        </div>
+        <div class="col m10 s10 offset-m1 offset-s1" ng-if="$ctrl.item.disabled">
+            <div class="col s12" ng-if="$ctrl.item.disabled">
+                <label class="color-brown">Descripción de la evidencia:</label>
+                <p>{{$ctrl.item.comment}}</p>
+            </div>
+        </div>
+        <div class="col m10 s10 offset-m1 offset-s1" ng-if="!$ctrl.item.media.name && !$ctrl.item.disabled">
+            <small class="blue-text"><strong>Nota:</strong> Comprimir para más de un archivo. Tamaño máximo de archivo 20 Mb.</small>
+            <div class="file-field input-field">
+                <div class="btn" ngf-select ngf-max-size="20MB" ng-model="$ctrl.item.file" ng-disabled="$crtl.disabled">
+                    <span>Soporte</span>
+                    <input type="file" ng-disabled="$crtl.disabled">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" ng-model="$ctrl.item.file.name" type="text" ng-disabled="$crtl.disabled">
+                </div>
+            </div>
+        </div>
+
+        <div class="col m10 s10 offset-m1 offset-s1" ng-if="$ctrl.item.media.name">
+            <div class="col s12">
+                <label class="color-brown">Soportes:</label>
+                <div class="valign-wrapper">
+                    <span style="flex-grow:1">{{$ctrl.item.media.name}}</span>
+                    <a style="flex-grow:0.1" class="btn lightseagreen" ng-href="{{$ctrl.item.media.url}}" target="_blank">DESCARGAR</a>
+                    <a style="flex-grow:0.1" class="btn lightgray" ng-if="$ctrl.item.canDelete" ng-click="$ctrl.clearMedia()">Borrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row center-align" ng-if="$ctrl.loading">
+        <loader size="medium" ng-class="{'display-none':!$ctrl.loading,'display-inline-block':$ctrl.loading}"></loader>
+    </div>
+    <div class="row center-align bottom" ng-if="!$ctrl.item.acceptable && !$ctrl.item.evaluable && !$ctrl.item.disabled && !$ctrl.loading">
+        <button class="btn brown" type="submit" ng-disabled="$ctrl.item.disabled">{{$ctrl.item.answer ? 'ACTUALIZAR':'GUARDAR'}}</button>
+    </div>
+    <div class="row center-align bottom" ng-if="$ctrl.item.evaluable && !$ctrl.loading">
+        <button type="button" class="btn green" ng-click="$ctrl.onApprove()">CUMPLE</button>
+        <button type="button" class="btn brown" ng-if="!$ctrl.item.rejectable" ng-click="$ctrl.onMoreInformation()">SOLICITAR MÁS INFORMACIÓN</button>
+        <button type="button" class="btn red" ng-if="$ctrl.item.rejectable" ng-click="$ctrl.onReject()">NO CUMPLE</button>
+    </div>
+    <div class="row center-align bottom" ng-if="$ctrl.item.acceptable && !$ctrl.loading">
+        <button type="button" class="btn green" ng-click="$ctrl.onEvaluatorAccepted()">ACEPTAR</button>
+        <button type="button" class="btn red" ng-click="$ctrl.onEvaluatorRejected()">RECHAZAR</button>
+    </div>
+    <div class="row  bottom" ng-if="$ctrl.item.disabled && ($ctrl.item.rejected || $ctrl.item.status.id == $ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE)">
+        <div class="col s12 center-align">
+            <div class="action color-red center-align">
+                <i class="fa fa-times"></i><br>
+                <span>No Cumple</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row center-align bottom" ng-if="$ctrl.item.disabled && ($ctrl.item.accepted || $ctrl.item.status.id == $ctrl.STATES.EVALUATION_REQUEST.CUMPLE)">
+        <div class="col s12 center-align">
+            <div class="action color-green center-align">
+                <i class="fa fa-check"></i><br>
+                <span>Cumple</span>
+            </div>
+        </div>
+    </div>
+</form>

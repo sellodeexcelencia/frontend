@@ -1,0 +1,74 @@
+<section class="service-evaluator">
+    <div class="info card row white">
+        <div class="badge gainsboro center-align">
+            <img src="assets/img/sell_gel.png" alt="badge" class="fame-icon">
+            <div class="lightseagreen color-white">
+                <span>{{$ctrl.service.category.name}}</span>
+            </div>
+        </div>
+        <div class="service-item-content">
+            <div class="color-brown">{{$ctrl.service.entity.name}}</div>
+            <div>
+                <div>{{$ctrl.service.id}} - {{$ctrl.service.name}}</div>
+                <div class="color-lightseagreen">Nivel: {{$ctrl.question.level}}</div>
+                <span>Plazo de evaluación: </span><span>{{$ctrl.request.end_time | date}}</span><br>
+                <span ng-if="$ctrl.service.test_user != ''">Usuario Prueba: </span><span>{{$ctrl.service.test_user }}</span><br>
+                <span ng-if="$ctrl.service.test_password != ''">Contraseña Prueba: </span><span>{{$ctrl.service.test_password }}</span><br>
+                <span ng-if="$ctrl.service.url != ''">URL del producto postulado: </span><a ng-href="{{$ctrl.service.url}}" target="_blank" class="color-lightseagreen">{{$ctrl.service.url}}</a>
+            </div>
+        </div>
+        
+    </div>
+    <requisite 
+        item="$ctrl.question" 
+        on-more-information="$ctrl.requestInformation()"
+        on-reject="$ctrl.reject()"
+        on-approve="$ctrl.approve()"
+        on-evaluator-accepted="$ctrl.evaluatorAccepted()"
+        on-evaluator-rejected="$ctrl.evaluatorRejected()"
+    ></requisite>
+    
+    <chat-evaluator 
+        request="$ctrl.request" 
+        ng-if="$ctrl.request.id_request_status == $ctrl.STATES.EVALUATION_REQUEST.RETROALIMENTACION
+        || $ctrl.selected.status.id == $ctrl.STATES.EVALUATION_REQUEST.CUMPLE
+        || $ctrl.selected.status.id == $ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE">
+    </chat-evaluator>
+
+    <a modal data-target="reject" open="$ctrl.openReject"></a>
+    <div id="reject" class="modal">
+        <form ng-submit="$ctrl.rejected()">
+        <script src='https://www.google.com/recaptcha/api.js?hl=es-419'></script>
+        <div class="modal-content center-align">
+            <div class="border">
+                <i class="fa fa-times color-red"></i><br>
+                <span class="color-brown congratulations">¿Está seguro que desea rechazar este requisito?</span><br>
+                <span>{{$ctrl.service.name}}</span><br>
+                <span class="color-lightseagreen">{{$ctrl.question.text}}</span>
+                <div class="g-recaptcha" data-sitekey="6LdJADAUAAAAACfLh7Ed2EugSUqDSjVLsjXQEC6l"></div>
+            </div>
+        </div>
+        <div class="center-align footer">
+            <div class="color-red" ng-if="$ctrl.robotError">* Marca la casilla de verificación para poder rechazar el requisito</div>
+            <button type="submit" class="btn" >Aceptar</button>
+            <a class="btn brown modal-action modal-close">Cerrar</a>
+        </div>
+        </form>
+    </div>
+
+    <a modal data-target="approve" open="$ctrl.openApprove"></a>
+    <div id="approve" class="modal">
+        <div class="modal-content center-align">
+            <div class="border">
+                <i class="fa fa-check color-green"></i><br>
+                <span class="color-brown congratulations">¿Está seguro que desea aprobar este requisito?</span><br>
+                <span>{{$ctrl.service.name}}</span><br>
+                <span class="color-lightseagreen">{{$ctrl.question.text}}</span>
+            </div>
+        </div>
+        <div class="center-align footer">
+            <a class="btn modal-action modal-close" ng-click="$ctrl.approved()">Aceptar</a>
+            <a class="btn brown modal-action modal-close">Cerrar</a>
+        </div>
+    </div>
+</section>

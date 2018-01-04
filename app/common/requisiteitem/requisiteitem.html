@@ -1,0 +1,68 @@
+<div class="row requisite-item">
+    <div class="badge gainsboro center-align">
+            <div alt="badge" class="fame-icon category-{{$ctrl.item.service.id_category}} level-{{$ctrl.item.question.level}}"></div>
+        <div class="lightseagreen color-white">
+            <span>Nivel: </span><span>{{$ctrl.item.question.level}}</span>
+        </div>
+    </div>
+    <div class="service-item-content">
+        <div class="brown color-white">{{$ctrl.item.topic.category.name}} <span class="pull-right" style="margin-right:5px">{{$ctrl.item.question.id}}</span></div>
+        <div class="gainsboro row">
+            <div class="content">
+                <div class="color-black">{{$ctrl.item.topic.name}}</div>
+                <div ng-if="!$ctrl.mayApply && ($ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.ASIGNADO)"><span class="color-black">Fecha de Asignación: </span>{{$ctrl.item.timestamp | date:'dd-MM-yyyy'}}</div>
+                <div ng-if="!$ctrl.mayApply && 
+                ($ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.SOLICITADO ||
+                $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.ACEPTADO || 
+                $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.RETROALIMENTACION)"><span class="color-black">Fecha de Aceptación: </span>{{$ctrl.item.timestamp | date:'dd-MM-yyyy'}}</div>
+                <div ng-if="$ctrl.mayApply"><span class="color-black">Fecha de Postulación: </span>{{$ctrl.item.timestamp | date:'dd-MM-yyyy'}}</div>
+                <div ng-if="$ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.CUMPLE || $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE">
+                            <span class="color-black">Fecha de Calificación: </span>{{$ctrl.item.timestamp | date:'dd-MM-yyyy'}}</div>
+                <div class="color-lightseagreen">{{$ctrl.item.service.name}}</div>
+                <div class="color-black">{{$ctrl.item.service.institution.name}}</div>
+                
+                <!--div>{{$ctrl.item.question.text }}</div-->
+            </div>
+            <!--div class="action center-align color-lightgray"
+                ng-click="$ctrl.onRejected()"
+                ng-if="!$ctrl.mayApply && $ctrl.item.status.id == $ctrl.STATES.EVALUATION_REQUEST.ASIGNADO">
+                <i class="fa fa-times-circle"></i><br>
+                <span>Rechazar</span>
+            </div>
+            <div class="action color-green center-align"
+                ng-click="$ctrl.onApproved()"
+                ng-if="!$ctrl.mayApply && $ctrl.item.status.id == $ctrl.STATES.EVALUATION_REQUEST.ASIGNADO">
+                <i class="fa fa-check-circle"></i><br>
+                <span>Aceptar</span>
+            </div-->
+            <div class="action lightseagreen center-align color-white"
+                ng-click="$ctrl.onSelected()"
+                ng-if="$ctrl.mayApply">
+                <i class="fa fa-check-circle"></i><br>
+                <span>Aplicar</span>
+            </div>
+            <div class="action center-align color-lightseagreen"
+                ng-click="$ctrl.onSelected()"
+                ng-if="!$ctrl.mayApply && 
+                ($ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.SOLICITADO || 
+                $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.ASIGNADO ||
+                $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.ACEPTADO || 
+                $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.RETROALIMENTACION)">
+                <i class="fa fa-chevron-circle-right"></i><br>
+                <span>Evaluar</span>
+            </div>
+            <div class="action color-red center-align"
+                ng-click="$ctrl.onSelected()"
+                ng-if="!$ctrl.mayApply && $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.NO_CUMPLE">
+                <i class="fa fa-times"></i><br>
+                <span style="display:block;width:59px;margin: auto;">No Cumple</span>
+            </div>
+            <div class="action color-green center-align"
+                ng-click="$ctrl.onSelected()"
+                ng-if="!$ctrl.mayApply && $ctrl.item.status.id==$ctrl.STATES.EVALUATION_REQUEST.CUMPLE">
+                <i class="fa fa-check"></i><br>
+                <span>Cumple</span>
+            </div>
+        </div>
+    </div>
+</div>

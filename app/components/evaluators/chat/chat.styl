@@ -1,0 +1,45 @@
+@import '../../../colors.styl'
+
+.chat
+    padding 10px
+
+.chat .messages-container
+    border-top-left-radius 5px
+    border-top-right-radius 5px
+    background #efefef
+    height 300px
+    overflow-y auto
+
+.chat .message
+    padding 10px
+    margin 10px
+    border-radius 5px
+
+.chat .message.mine
+    width 69%
+    margin-left 30%
+    background #55ddff
+
+.chat .message.remote
+    width 69%
+    margin-left 1%
+    background $gainsboro
+
+.chat .userinput
+    padding 20px
+    margin-bottom 0px
+    padding-bottom 0px
+
+.chat .evaluator-tabs
+    color $brown
+    padding-bottom 20px
+
+.chat .evaluator-tabs .item
+    cursor pointer
+
+.chat .evaluator-tabs .active
+    border-top solid 1px $brown
+    font-weight bold
+
+.chat .border
+    padding 0px

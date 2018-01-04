@@ -1,0 +1,99 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo color-brown">
+      <img class="left" src="assets/img/sell_gel.png" alt="sello de experiencia" width="35">
+      <small>Sello de Excelencia</small>
+    </a>
+    <div class="logos">
+      <img ng-src="{{$ctrl.logo_header}}" alt="logos">
+    </div>
+    <a href="#" data-activates="mobile-demo" class="button-collapse color-brown" data-sidenav="left" data-closeonclick="false">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul class="right hide-on-med-and-down">
+      <li>
+        <a href="" class="color-brown" ng-click="$ctrl.changeFontSize('decrease')">
+          <i class="material-icons">zoom_out</i>
+        </a>
+      </li>
+      <li>
+        <a href="" class="color-brown" ng-click="$ctrl.changeFontSize('increase')">
+          <i class="material-icons">zoom_in</i>
+        </a>
+      </li>
+      <li ng-show="!$ctrl.isAuthenticated()">
+        <a href="/sign-in" class="color-brown">
+          <i class="material-icons left">person</i>
+          Iniciar sesión
+        </a>
+      </li>
+      <li ng-show="$ctrl.isAuthenticated()">
+        <a class="dropdown-button color-brown" href="#!" data-activates="dropdownUser" dropdown data-hover="false">
+          <i class="material-icons right">arrow_drop_down</i>
+          <i class="material-icons left" ng-show="!$ctrl.getCurrentUser().picture">face</i>
+          <span ng-if="$ctrl.getCurrentUser().name">{{$ctrl.getCurrentUser().name}} {{$ctrl.getCurrentUser().lastname}}</span>
+          <span ng-if="!$ctrl.getCurrentUser().name">{{$ctrl.getCurrentUser().email}}</span>      
+        </a>
+      </li>
+    </ul>
+    <!--moble -->
+    <ul class="side-nav" id="mobile-demo">
+      <li>
+        <a href="" ng-click="$ctrl.changeFontSize('decrease')">
+          <i class="material-icons">zoom_out</i>
+        </a>
+      </li>
+      <li>
+        <a href="" ng-click="$ctrl.changeFontSize('increase')">
+          <i class="material-icons">zoom_in</i>
+        </a>
+      </li>
+      <li class="divider"></li>
+      <li ng-show="!$ctrl.isAuthenticated()">
+        <a href="/sign-in">
+          <i class="material-icons right">person</i>Iniciar sesión
+        </a>
+      </li>
+      <li ng-show="$ctrl.isAuthenticated()">
+        <a href="/">
+          <i class="material-icons right">face</i>
+          {{$ctrl.getCurrentUser().name}} {{$ctrl.getCurrentUser().lastname}}
+        </a>
+      </li>
+      <li ng-show="$ctrl.isAuthenticated()">
+        <a href="" ng-click="$ctrl.logout()">
+          <i class="material-icons right">keyboard_backspace</i>
+          Salir
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ul id="dropdownUser" class="dropdown-content">
+  <li ng-if="$ctrl.canProfile">
+    <a ng-click="$ctrl.goProfile()">
+      <i class="material-icons right">mode_edit</i>
+      Perfil
+    </a>
+  </li>
+  <li ng-if="$ctrl.canAdvance">
+      <a ng-click="$ctrl.goAdvance()">
+        <i class="material-icons right">show_chart</i>
+        Mi Avance
+      </a>
+    </li>
+    <li>
+        <a ng-click="$ctrl.goChangePwd()">
+          <i class="material-icons right">vpn_key</i>
+          Cambiar Contraseña
+        </a>
+      </li>
+  <li class="divider"></li>
+  <li>
+    <a ng-click="$ctrl.logout()">
+      <i class="material-icons right">keyboard_backspace</i>
+      Salir
+    </a>
+  </li>
+</ul>

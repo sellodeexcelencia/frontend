@@ -1,0 +1,19 @@
+<div class="fame-item" ng-click="$ctrl.goTo({state:$ctrl.item})">
+    <div class="row valign-wrapper">
+        <div class="fame-item-number-outter {{$ctrl.other}}">
+            <div class="fame-item-number {{$ctrl.other}}">
+                <div class="fame-item-number-inner {{$ctrl.other}}">
+                    {{$ctrl.position}}
+                </div>
+            </div>
+        </div>
+        <div class="content gainsboro valign-wrapper">
+            <p>{{$ctrl.item.name | uppercase}}</p>
+        </div>
+        <div class="badge" style="position:absolute;right:0px;height:100%;width:auto;">
+            <div class="fa fa-certificate star color-yellow">
+                <span class="color-white">{{$ctrl.item.points}}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="servicelist">
+    <div class="container center-align">
+        <div class="card white color-brown row title">
+            <h3>Productos o Servicios Certificados</h3>
+        </div>
+        <div class="card white row logo">
+            <img src="assets/img/sell_gel.png" alt="stamp" height="130">
+        </div>
+        <div class="search brown row">
+            <div class="col m1 s12 search-label">
+                <span class="color-white">Buscar:</span>
+            </div>
+            <div class="col m3 s12">
+                <autocomplete on-selected="$ctrl.selectedInstitution(item)" endpoint="$ctrl.institutionEndpoint" placeholder="Nombre de la entidad"></autocomplete>                
+            </div>
+            <div class="col m3 s12">
+                <autocomplete on-selected="$ctrl.selectedService(item)" endpoint="$ctrl.dataEndpoint + '&filter_field=id_category&filter_value=' + $ctrl.category.id" placeholder="Nombre del producto o servicio"></autocomplete>
+            </div>
+            <div class="col m2 s12">
+                <input ng-model="$ctrl.query.fields.postulation" format="yyyy-mm-dd" ng-change="$ctrl.getData()" class="datepicker" placeholder="Fecha de postulación"></input>
+            </div>
+            <div class="col m2 s12">
+                <input ng-model="$ctrl.query.fields.certification" format="yyyy-mm-dd" ng-change="$ctrl.getData()" class="datepicker" placeholder="Fecha de certificación"></input>
+            </div>
+            <div class="col m1 s12">
+                <a class="btn-floating waves-effect waves-dark  white"
+                    ng-click="$ctrl.search()">
+                    <i class="material-icons color-brown">search</i>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="white-text center-align btn col m3 s12 category-button" 
+            ng-class="{active:$ctrl.category.id == category.id}" 
+            ng-click="$ctrl.selectCategory(category)"
+            ng-repeat="category in $ctrl.categories">
+                <span>{{category.name}}</span>
+            </div>
+        </div>
+        <div class="card row left-align">
+            <div class="center-align">
+                <loader size="medium" ng-class="{'display-none':!$ctrl.loading,'display-inline-block':$ctrl.loading}"></loader>
+            </div>
+            <table class="striped centered responsive-table" ng-if="$ctrl.list.length">
+                <!--h5 style="padding:10px">Información de interés</h5-->
+                <thead>
+                    <tr class="color-brown">
+                        <th data-field="entity">Nombre de la Entidad</th>
+                        <th data-field="product">Nombre del Producto</th>
+                        <th data-field="url">Url del Producto</th>
+                        <th data-field="postulation">Fecha de postulación</th>
+                        <th data-field="certification">Fecha de certificación</th>
+                        <th data-field="level">Nivel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $ctrl.list" class="service-table-item" ng-click="$ctrl.goTo(item)">
+                        <td>{{item.institution.name}}</td>
+                        <td>{{item.name}}</td>
+                        <td class="color-lightseagreen url">{{item.url}}</td>
+                        <td>{{item.timestamp | date}}</td>
+                        <td>{{item.history[0].timestamp | date}}</td>
+                        <td>{{item.history[0].level}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <div class="row brown color-white pager center-align" ng-if="$ctrl.pager.total_pages > 1">
+            <ul>
+                <li ng-if="$ctrl.pager.before" ng-click="$ctrl.prev()">
+                    <i class="fa fa-step-backward"></i>
+                </li>
+                <li ng-repeat="page in $ctrl.pager.pages" ng-click="$ctrl.navigate(page)" 
+                    ng-class="{'active':$ctrl.query.page == page}" class="page">{{page}}</li>
+                <li ng-if="$ctrl.pager.after" ng-click="$ctrl.next()">
+                    <i class="fa fa-step-forward"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div ng-if="$ctrl.category" ng-click="$ctrl.download()" class="white color-lightseagreen col m2 s12 download push-m10">
+                <span>Descargar</span> Tabla <i class="fa fa-arrow-circle-o-down"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer-app></footer-app>

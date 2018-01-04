@@ -1,0 +1,28 @@
+<section class="activity">
+    <div class="row activity-tabs mini" ng-if="!$ctrl.requisite">
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'asignated'}" ng-click="$ctrl.setSection('asignated')">
+            <div class="center-align">
+                Asignadas
+            </div>
+        </div>
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'postulate'}" ng-click="$ctrl.setSection('postulate')">
+            <div class="center-align">
+                Voluntarias
+            </div>
+        </div>
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'proccess'}" ng-click="$ctrl.setSection('proccess')">
+            <div class="center-align">
+                En proceso
+            </div>
+        </div>
+        <div class="card tab valign-wrapper" ng-class="{active:$ctrl.section === 'finished'}" ng-click="$ctrl.setSection('finished')">
+            <div class="center-align">
+                Evaluadas
+            </div>
+        </div>
+
+    </div>
+    <div ui-view>
+    </div>
+    
+</section>
