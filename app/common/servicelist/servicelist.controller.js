@@ -155,7 +155,7 @@ class ServiceDetailController {
   download() {
     var url = this.createUrl()
     var request = new XMLHttpRequest()
-    request.open('GET', url + '&download=true')
+    request.open('GET', url + '&download=true&limit=5000')
     request.setRequestHeader('Authorization', localStorage.getItem('token'))
     request.responseType = 'blob'
     request.onload = function () {
