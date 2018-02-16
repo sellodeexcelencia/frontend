@@ -153,9 +153,10 @@ class ServiceDetailController {
     this.$state.go('detail', { id: item.id })
   }
   download() {
-    var url = this.createUrl()
+    var url = this.createUrl().replace('limit='+this.query.limit,'limit=1000000000')
+    url = url.replace('page='+this.query.page,'page=1')
     var request = new XMLHttpRequest()
-    request.open('GET', url + '&download=true&limit=5000')
+    request.open('GET', url + '&download=true')
     request.setRequestHeader('Authorization', localStorage.getItem('token'))
     request.responseType = 'blob'
     request.onload = function () {
