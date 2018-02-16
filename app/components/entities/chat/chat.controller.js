@@ -30,17 +30,23 @@ class chatEntity {
       this.messages.push(data)
     })
   }
+  $onChanges(){
+    if(this.service.id && this.item.id){
+      this.$http.get(
+        this.evaluationRequestEndpoint +
+        '?filter_field=id_service&filter_value=' + this.service.id +
+        '&filter_field=id_question&filter_value=' + this.item.id
+      ).then((results) => {
+        this.users = results.data.data
+        if(this.users.length > 0){
+          this.selectEvaluator(this.users[0])
+        }
+      })  
+    }
+    
+  }
   $onInit() {
-    this.$http.get(
-      this.evaluationRequestEndpoint +
-      '?filter_field=id_service&filter_value=' + this.service.id +
-      '&filter_field=id_question&filter_value=' + this.item.id
-    ).then((results) => {
-      this.users = results.data.data
-      if(this.users.length > 0){
-        this.selectEvaluator(this.users[0])
-      }
-    })
+    
   }
 }
 
