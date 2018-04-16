@@ -54,13 +54,13 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.5.9",
     "angular-animate": "^1.5.9",
+    "angular-i18n": "^1.5.9",
     "angular-materialize": "^0.2.1",
     "angular-toastr": "^2.1.1",
-    "angular-ui-router": "^1.0.0-alpha.5",
     "ng-file-upload": "^12.2.13",
-    "satellizer": "^0.15.5",
-    "angular-i18n": "^1.5.9"
+    "satellizer": "^0.15.5"
   }
 }
