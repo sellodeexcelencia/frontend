@@ -140,6 +140,10 @@ class RegisterEvaluatorController {
     this.getRegions()
   }
   sendRegister(){
+    if(!this.register.id_availability){
+      this.error = 'Selecciona al menos una opción de disponibilidad.'
+      return
+    }
     this.$http.post(this.registerEndpoint,this.register).then((/*result*/)=>{
       this.openConfirmation = true
       this.section = 2

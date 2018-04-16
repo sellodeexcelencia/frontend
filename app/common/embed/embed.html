@@ -1,9 +1,12 @@
 <a class="embeded" href="http://sellodeexcelencia.gov.co/detalle/{{$ctrl.$state.params.id}}" target="_blank">
-    <div class="container center-align">
+    <div class="container center-align" ng-if="$ctrl.item.is_active">
         <div class="row logo">
             <div class="badge">
                 <div alt="badge" class="fame-icon category-{{$ctrl.item.id_category}} level-{{$ctrl.item.level}}"></div>
             </div>
         </div>
+    </div>
+    <div class="container center-align" ng-if="$ctrl.item && !$ctrl.item.is_active">
+        <h3>El Producto o Servicio no se encuentra activo.</h3>
     </div>
 </a>

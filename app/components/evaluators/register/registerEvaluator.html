@@ -132,6 +132,7 @@
           <div class="row" ng-repeat="category in $ctrl.categories">
             <div class="col s12 m12">
               <div class="divider" ng-if="$index > 0"></div>
+              <span ng-if="$ctrl.hasCategory(category) > -1 && !category.user_selected">No olvides que al seleccionar una categoría debes seleccionar un tipo de usuario y al menos una </span><span class="color-brown">temática de interés</span>
               <div class="row">
                 <div class="col s12 m6">
                   <div class="input-field">
