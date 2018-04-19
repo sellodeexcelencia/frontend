@@ -5,7 +5,7 @@ class advanceEvaluatorController{
     this.$http = $http
     this.$auth = $auth
     this.pointsEndpoint = Api +'/configuration/points'
-    this.motivesEndpoint = Api +'/configuration/motives?limit=5000'
+    this.motivesEndpoint = Api +'/configuration/motives?limit=5000&filter_field=id_role&filter_value=2'
     this.motivenamesEndpoint = Api +'/configuration/motivename'
     this.pagestoshow = 5
     this.pager = {
