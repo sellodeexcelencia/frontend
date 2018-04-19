@@ -64,7 +64,7 @@
     <div class="col m10 offset-m1 s10 offset-s1 ">
         <h3 class="color-brown">¿Cómo funciona el sistema de puntuación?</h3>
         <ul>
-            <li ng-repeat="motive in $ctrl.motives" ng-if="motive.public">
+            <li ng-repeat="motive in $ctrl.motives" ng-if="motive.public  && motive.id_role == 2">
                 <span ng-if="motive.points < 0" class="color-red">( - ) {{motive.description}}</span>
                 <span ng-if="motive.points >= 0">( + ) {{motive.description}}</span>
             </li>
