@@ -57,7 +57,7 @@ class serviceEvaluator{
   getAnswer(){
     this.$http.get(this.answerEndpoint+'?id='+this.answer.id).then((result)=>{
       this.question.media = result.data.data[0].media
-      if(this.question.media.url){
+      if(this.question.media && this.question.media.url){
         this.question.media.name = this.question.media.url.substr(this.question.media.url.lastIndexOf('/')+1)
       }
     })

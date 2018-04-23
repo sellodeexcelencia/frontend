@@ -50,7 +50,7 @@ class entityService{
           question.media = this.answers[ids[question.id]].media
           question.status = this.answers[ids[question.id]].status
           
-          if(question.media.url){
+          if(question.media && question.media.url){
             question.media.name = question.media.url.substr(question.media.url.lastIndexOf('/')+1)
           }
           if(question.status.id === this.STATES.EVALUATION_REQUEST.RETROALIMENTACION){

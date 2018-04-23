@@ -115,7 +115,7 @@ class postulateEntityController {
           if(this.answers[ids[question.id]].id_status === this.STATES.EVALUATION_REQUEST.ERROR){
             question.error = true
           }
-          if(question.media.url){
+          if(question.media && question.media.url){
             question.media.name = question.media.url.substr(
               question.media.url.lastIndexOf('/')+1)
             question.canDelete = true
