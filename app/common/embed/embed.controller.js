@@ -4,7 +4,7 @@ class EmbedController {
     this.$state = $state
     this.Api = Api
     this.$http = $http
-    this.detailEndpoint = Api+'/service/service?id='+$state.params.id
+    this.detailEndpoint = Api+'/service/service?simple=false&id='+$state.params.id
     if($auth.isAuthenticated()){
       this.disabled = $auth.getPayload().role === 'Evaluador' ||
         $auth.getPayload().role === 'Entidad'
@@ -18,6 +18,28 @@ class EmbedController {
   getData(){
     this.$http.get(this.detailEndpoint).then((results)=>{
       this.item = results.data.data[0]
+      if(!this.item){
+        this.item = {
+          is_active : 0,
+          history:[]
+        }
+      }
+      var level = -1
+      this.item.history.forEach((status)=>{
+        if(status.id_status === this.STATES.SERVICE.CUMPLE){
+          if(status.level > level){
+            level = status.level
+            this.item.status = status
+          }
+        }
+      })
+      if(level  === -1){
+        this.item.is_active = 0
+      }
+      if(this.item.url && this.item.url.indexOf('http') !== 0){
+        this.item.url = 'http://'+this.item.url
+      }
+      
     })
   }
 }

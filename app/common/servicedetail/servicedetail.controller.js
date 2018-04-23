@@ -38,7 +38,7 @@ class ServiceDetailController {
         }
       })
       if(level  === -1){
-        this.item.id_active = 0
+        this.item.is_active = 0
       }
       if(this.item.url && this.item.url.indexOf('http') !== 0){
         this.item.url = 'http://'+this.item.url
