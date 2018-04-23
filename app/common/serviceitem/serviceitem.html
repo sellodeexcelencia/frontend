@@ -39,7 +39,7 @@
                 <br>
                 <span>Renovar</span>
             </div>
-            <div class="action color-green center-align" ng-click="$ctrl.onUpgrade($ctrl.item)" ng-if="$ctrl.item.current_status == $ctrl.STATES.SERVICE.CUMPLE || $ctrl.item.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE && $ctrl.item.certified">
+            <div class="action color-green center-align" ng-if="$ctrl.canUpgrade" ng-click="$ctrl.onUpgrade($ctrl.item)" ng-if="$ctrl.item.current_status == $ctrl.STATES.SERVICE.CUMPLE || $ctrl.item.current_status == $ctrl.STATES.SERVICE.NO_CUMPLE && $ctrl.item.certified">
                 <!--i class="fa fa-download"></i-->
                 <i class="material-icons" style="font-size: 31px;">trending_up</i>
                 <br>

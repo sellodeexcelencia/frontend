@@ -4,6 +4,7 @@ class serviceItemController{
     this.Api = Api
     this.STATES = STATES
     this.$http = $http
+    this.canUpgrade = false
     this.serviceEndpoint = Api+'/service/service_status?&order=timestamp%20desc&filter_field=id_service&filter_value='
   }
   $onInit(){
@@ -14,6 +15,9 @@ class serviceItemController{
           if(status.id_status === this.STATES.SERVICE.CUMPLE){
             if(!found){
               this.item.status = status
+              if(item.status.level < 3){
+                this.canUpgrade = true
+              }
             }
             found = true
           }
