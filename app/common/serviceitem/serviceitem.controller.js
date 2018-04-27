@@ -10,15 +10,16 @@ class serviceItemController{
     this.maxlevel = 0
   }
   checkLevel(){
-    if(this.item.status && this.item.status.level <= this.maxlevel){
+    if(this.item.status && this.item.status.level && this.item.status.level < this.maxlevel){
       this.canUpgrade = true
+    }else{
+      this.canUpgrade = false
     }
   }
   $onInit(){
     this.$http.get(this.levelEndpoint+this.item.id_category).then((results)=>{
-      this.maxlevel = results.data[0].leve
+      this.maxlevel = results.data.data[0].level
       this.checkLevel()
-      
     })
     this.$http.get(this.serviceEndpoint+this.item.id).then((results)=>{
       if(this.item.certified){
