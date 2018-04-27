@@ -6,8 +6,20 @@ class serviceItemController{
     this.$http = $http
     this.canUpgrade = false
     this.serviceEndpoint = Api+'/service/service_status?&order=timestamp%20desc&filter_field=id_service&filter_value='
+    this.levelEndpoint = Api+'/question/level?category='
+    this.maxlevel = 0
+  }
+  checkLevel(){
+    if(this.item.status && this.item.status.level <= this.maxlevel){
+      this.canUpgrade = true
+    }
   }
   $onInit(){
+    this.$http.get(this.levelEndpoint+this.item.id_category).then((results)=>{
+      this.maxlevel = results.data[0].leve
+      this.checkLevel()
+      
+    })
     this.$http.get(this.serviceEndpoint+this.item.id).then((results)=>{
       if(this.item.certified){
         let found = false
@@ -15,9 +27,7 @@ class serviceItemController{
           if(status.id_status === this.STATES.SERVICE.CUMPLE){
             if(!found){
               this.item.status = status
-              if(item.status.level < 3){
-                this.canUpgrade = true
-              }
+              this.checkLevel()
             }
             found = true
           }
