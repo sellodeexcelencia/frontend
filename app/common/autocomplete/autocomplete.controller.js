@@ -16,10 +16,6 @@ class autocompleteController {
         e.data.onSelected({item:null})
         e.data.$scope.$apply()
       }
-      
-      
-      
-      
     })
   }
   clear() {
@@ -36,6 +32,9 @@ class autocompleteController {
     return string
   }
   select(item) {
+    if(this.value === item){
+      return
+    }
     this.value = item
     this.query.filter = item.name
     this.list = []
@@ -44,6 +43,11 @@ class autocompleteController {
     }
   }
   getData() {
+    if(this.value){
+      if(this.value.name.trim() == this.query.filter){
+        return
+      }
+    }
     this.list = []
     this.loading = true
     var url = this.endpoint
