@@ -8,6 +8,7 @@ class bannerDetail{
   $onInit(){
     this.$http.get(this.bannerEndpoint).then((result)=>{
       this.banner = result.data.data[0]
+      this.banner._summary = this.$sce.trustAsHtml(this.banner.summary)
       this.banner._trusted = this.$sce.trustAsHtml(this.banner.text)
     })
   }

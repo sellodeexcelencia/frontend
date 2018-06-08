@@ -9,7 +9,7 @@
         <div ng-if="$ctrl.banner.id_type_banner == 3" class="_caption">
             <div class="_content">
                 <h5 class="color-white font-bold">{{$ctrl.banner.title}}</h5>
-                <p class="color-white summary">{{$ctrl.banner.summary}}</p>
+                <p class="color-white summary" ng-bind-html="$ctrl.banner._summary"></p>
             </div>
         </div>
     </div>
