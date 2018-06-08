@@ -27,7 +27,7 @@
         <div class="col m6 s12">
           <div>
               <label>Categoría:</label>
-            <select ng-model="$ctrl.service.id_category" ng-disabled="$ctrl.service.id" ng-required="true">
+            <select ng-model="$ctrl.service.id_category" ng-change="$ctrl.selectCategory()" ng-disabled="$ctrl.service.id" ng-required="true">
                 <option ng-value="category.id" ng-repeat="category in $ctrl.categories">{{category.name}}</option>
             </select>
           </div>
@@ -36,9 +36,7 @@
           <div>
               <label>Nivel:</label>
             <select ng-model="$ctrl.service.level" ng-disabled="$ctrl.service.id" ng-required="true">
-              <option ng-value="1">1</option>
-              <option ng-value="2">2</option>
-              <option ng-value="3">3</option>
+              <option ng-value="level" ng-repeat="level in $ctrl.levels">{{level}}</option>
             </select>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { trimHashVal } from "@uirouter/core";
+
 class postulateEntityController {
   constructor(Api, $http, $auth, $state,STATES) {
     'ngInject'
@@ -12,10 +14,12 @@ class postulateEntityController {
     this.serviceStatusEndpoint = Api + '/service/service_status?order=timestamp%20desc&filter_field=id_service&filter_value='
     this.questionEndpoint = Api + '/question/question?simple=false&limit=50&filter_field=topic.id_category&filter_value='
     this.answerEndpoint = Api + '/question/user_answer'
+    this.levelEndpoint = Api+'/question/level?category='
     this.loading = false
     this.isUpgrade = false
     this.isRenew = false
     this.previouslevel = null
+    this.levels = [1,2,3]
   }
   $onInit() {
     this.$http.get(this.categoriesEndpoint).then((results) => {
@@ -23,6 +27,16 @@ class postulateEntityController {
     })
     this.entity = this.user.institutions[0]
     this.clearService()
+  }
+  selectCategory(){
+    this.$http.get(this.levelEndpoint+this.service.id_category).then((results)=>{
+      
+      var maxlevel = results.data.data[0].level
+      this.levels = []
+      for(var i = 1 ; i <= maxlevel ; i++){
+        this.levels.push(i)
+      }
+    })
   }
   selectService() {
     this.questions = [] 

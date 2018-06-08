@@ -13,6 +13,7 @@ class serviceItemController{
     if(this.item.status && this.item.status.level && this.item.status.level < this.maxlevel){
       if(this.item.certified){
         this.canUpgrade = true
+        this.item.maxlevel = this.maxlevel
       }else{
         this.canUpgrade = false  
       }

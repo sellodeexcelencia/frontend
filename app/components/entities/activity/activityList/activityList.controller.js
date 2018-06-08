@@ -154,7 +154,8 @@ class activityEntityListController {
     this.selectedService = service
     this.openSelector = true
     this.levels = []
-    for (var i = service.status.level + 1; i <= 3; i++) {
+    this.level = null
+    for (var i = service.status.level + 1; i <= service.maxlevel; i++) {
       this.levels.push(i)
     }
   }
