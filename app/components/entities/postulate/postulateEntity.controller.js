@@ -1,5 +1,3 @@
-import { trimHashVal } from "@uirouter/core";
-
 class postulateEntityController {
   constructor(Api, $http, $auth, $state,STATES) {
     'ngInject'
