@@ -19,13 +19,13 @@
                     Próximo Live:
                 </div>
                 <div class="image">
-                    <img ng-src="{{$ctrl.selected.image}}" alt="{{$ctrl.selected.name}}">
+                    <img ng-src="{{$ctrl.selected.image}}" alt="{{$ctrl.selected.title}}">
                 </div>
             </div>
             <div class="col m6 s12">
-                <h3 class="color-brown">{{$ctrl.selected.name}}</h3>
+                <h3 class="color-brown">{{$ctrl.selected.title}}</h3>
                 <span class="color-black">{{$ctrl.selected.description}}</span><br>
-                <span>{{$ctrl.selected.date | date}}</span><br>
+                <span>{{$ctrl.selected.activation_date | date}}</span><br>
                 <!--a class="btn" ng-href="{{$ctrl.selected.url}}" ng-click="$ctrl.goLive()"target="_blank">Entrar al live</a><br-->
                 <a class="btn" ng-click="$ctrl.goLive()" ng-disabled="$ctrl.selected.disabled">Entrar al live</a><br>
                 <small class="pull-left" ng-if="$ctrl.selected.disabled">*El enlace será habilitado en el momento de comenzar la transmisión</small>
@@ -35,12 +35,12 @@
             <div class="col m4 s12  learnitem" ng-repeat="item in $ctrl.list" ng-click="$ctrl.setSelected(item)">
                 <div class="gainsboro row learnitem-content valign-wrapper">
                     <div class="image col m4 s4">
-                        <img ng-src="{{item.image}}" alt="{{item.name}}">
+                        <img ng-src="{{item.image}}" alt="{{item.title}}">
                     </div>
                     <div class="col m8 s8">
-                        <span class="color-brown">{{item.name}}</span>
+                        <span class="color-brown">{{item.title}}</span>
                         <span>{{item.description}}</span><br>
-                        <span>{{item.date | date}}</span>
+                        <span>{{item.activation_date | date}}</span>
                     </div>
                 </div>
             </div>
